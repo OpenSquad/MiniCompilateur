@@ -1,4 +1,9 @@
+%union {
+int entier;
+char* str;}
+
 %token  mc_ALGORITHME mc_type mc_VAR mc_DEBUT mc_FIN mc_Pour mc_jusque mc_Faire mc_Fait mc_SI op_AFF op_comp op_arith bar parenthese_gauche parenthese_droite identificateur constante commentaire dp pvg crochet_gauche crochet_droit 
+
 
 %%
 structure_generale:dec_algo mc_VAR partieDeclaration mc_DEBUT partieInstruction mc_FIN {printf("correcte");}
