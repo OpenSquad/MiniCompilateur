@@ -40,28 +40,30 @@
       know about them.  */
    enum yytokentype {
      mc_ALGORITHME = 258,
-     mc_type = 259,
-     mc_VAR = 260,
-     mc_DEBUT = 261,
-     mc_FIN = 262,
-     mc_Pour = 263,
-     mc_jusque = 264,
-     mc_Faire = 265,
-     mc_Fait = 266,
-     mc_SI = 267,
-     op_AFF = 268,
-     op_comp = 269,
-     op_arith = 270,
-     bar = 271,
-     parenthese_gauche = 272,
-     parenthese_droite = 273,
-     identificateur = 274,
-     constante = 275,
-     commentaire = 276,
-     dp = 277,
-     pvg = 278,
-     crochet_gauche = 279,
-     crochet_droit = 280
+     mc_entier = 259,
+     mc_reel = 260,
+     mc_chaine = 261,
+     mc_VAR = 262,
+     mc_DEBUT = 263,
+     mc_FIN = 264,
+     mc_Pour = 265,
+     mc_jusque = 266,
+     mc_Faire = 267,
+     mc_Fait = 268,
+     mc_SI = 269,
+     op_AFF = 270,
+     op_comp = 271,
+     op_arith = 272,
+     bar = 273,
+     parenthese_gauche = 274,
+     parenthese_droite = 275,
+     identificateur = 276,
+     constante = 277,
+     commentaire = 278,
+     dp = 279,
+     pvg = 280,
+     crochet_gauche = 281,
+     crochet_droit = 282
    };
 #endif
 
@@ -72,14 +74,14 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 6 "synt.y"
+#line 8 "synt.y"
 
 int entier;
 char* chaine;
 
 
 /* Line 1676 of yacc.c  */
-#line 83 "synt.tab.h"
+#line 85 "synt.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

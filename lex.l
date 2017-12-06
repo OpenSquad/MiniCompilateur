@@ -1,5 +1,6 @@
 %{
-int nb_ligne=0;
+int nb_ligne=1,nb_colonne=1;
+
 #include "synt.tab.h"
 #include <stdio.h> 
 #include<string.h>
@@ -13,43 +14,51 @@ const {chiffre}+("."{chiffre}*)?
 %%
 stop yyterminate();
 
-ALGORITHME return mc_ALGORITHME;
-entier|reel|chaine return mc_type;
+ALGORITHME {nb_colonne+=yyleng;return mc_ALGORITHME;}
+entier {nb_colonne+=yyleng;yylval.chaine=strdup(yytext); return mc_entier;}
+reel  {yylval.chaine=strdup(yytext);nb_colonne+=yyleng; return mc_reel;  }
+chaine {yylval.chaine=strdup(yytext);nb_colonne+=yyleng; return mc_chaine;}
 
+VAR {nb_colonne+=yyleng;return mc_VAR;}
+DEBUT {nb_colonne+=yyleng; return mc_DEBUT;}
+FIN {nb_colonne+=yyleng; return mc_FIN; }
 
-VAR return mc_VAR;
-DEBUT return mc_DEBUT;
-FIN return mc_FIN;
+Pour {nb_colonne+=yyleng; return mc_Pour; }
+jusque {nb_colonne+=yyleng; return mc_jusque;}
+Faire {nb_colonne+=yyleng; return mc_Faire;}
+Fait {nb_colonne+=yyleng; return mc_Fait;}
+SI {nb_colonne+=yyleng; return mc_SI; }
 
-Pour return mc_Pour;
-jusque return mc_jusque;
-Faire return mc_Faire;
-Fait return mc_Fait;
-SI return mc_SI;
-
-"<--" return op_AFF;
-!=|=|<|>|<=|>= return op_comp;
-[+*-/] {yylval.chaine=strdup(yytext);
-		return op_arith;}
-\| return bar;
+"<--" {nb_colonne+=yyleng;return op_AFF; }
+!=|=|<|>|<=|>= {nb_colonne+=yyleng; return op_comp;}
+[+*-/] {yylval.chaine=strdup(yytext); nb_colonne+=yyleng;
+		return op_arith; }
+\| {nb_colonne+=yyleng; return bar;}
 
 
 {idf} {if (yyleng >12) printf ("erreur , il faut moins de 12 car") ;
         else {yylval.chaine=strdup(yytext);
+		nb_colonne+=yyleng;
         return identificateur;}}
 		
-{const} {yylval.entier=atoi(yytext);return constante;}
+{const} {yylval.entier=atoi(yytext); nb_colonne+=yyleng; return constante;}
 
 															
-"(" return parenthese_gauche;
-")" return parenthese_droite;
+"(" {nb_colonne+=yyleng; return parenthese_gauche;}
+")" {nb_colonne+=yyleng; return parenthese_droite;}
 "/*"([^*]*("*"+[^*/])*)*"*"+"/" 
 
-[ \t] 
-\n {nb_ligne++;}
-: return dp;
-; return pvg;
-"[" return crochet_gauche;
-"]" return crochet_droit;
+[ \t] nb_colonne+=yyleng;
+\n {nb_ligne++;nb_colonne=1;}
+: {nb_colonne+=yyleng; return dp;}
+; {nb_colonne+=yyleng; return pvg;}
+"[" {nb_colonne+=yyleng; return crochet_gauche;}
+"]" {nb_colonne+=yyleng; return crochet_droit;}
 
-. printf("erreur lexicale à la ligne %d \n",nb_ligne) ;
+. printf("erreur lexicale a la ligne %d colonne %d\n",nb_ligne,nb_colonne) ;
+
+%%
+int yywrap()
+{ return 1;}
+
+
