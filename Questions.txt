@@ -1,0 +1,55 @@
+
+--   [\t] ne marche pas , [ \t] marche parcequ'il y a un espace 
+pourquoi il y a les crochets dans [ \t] contrairement à \n
+
+-- "" vs \     ,\" ,\"",
+
+
+-------------------------
+-var dans boucle (idf ou cst ou les eux?)
+-commentaire //
+
+-commentaire avant et après l'aALGO?
+
+
+
+------------------problem---------------
+
+
+
+exp_arith: identificateur op_arith exp_arith 
+          |constante   op_arith  exp_arith
+							  | constante
+;
+
+
+ALGORITHME algo
+VAR entier a;
+a[5]:entier;a:entier; b:reel;
+DEBUT 
+Faire a<--5; SI (a=5)
+a<--val;
+Pour a<--5 jusque 5 Faire a<--5;Faire a<--5; SI (a=5)
+a<--val;
+a<--val; Fait
+FIN
+
+Faire a<--5; SI (a=5)
+a<--val;
+Pour a<--5 jusque 5 Faire a<--5;Faire a<--5; SI (a=5)
+a<--val;
+a<--val; Fait
+
+
+
+
+
+
+
+partieInstruction: inst_aff partieInstruction    {printf("correct");}
+					| inst_boucle partieInstruction
+					| inst_cond  partieInstruction
+					| inst_aff
+					|inst_boucle
+					|inst_cond
+;					

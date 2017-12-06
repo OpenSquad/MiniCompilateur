@@ -303,7 +303,7 @@ static yyconst int yy_ec[256] =
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    2,    4,    1,    1,    1,    1,    1,    1,    5,
-        6,    7,    8,    1,    9,   10,   11,   12,   12,   12,
+        6,    7,    8,    8,    9,   10,   11,   12,   12,   12,
        12,   12,   12,   12,   12,   12,   12,   13,   14,   15,
        16,   17,    1,    1,   18,   19,   20,   21,   22,   23,
        24,   25,   26,   20,   20,   27,   28,   29,   30,   31,
@@ -371,7 +371,7 @@ static yyconst short int yy_def[94] =
 
 static yyconst short int yy_nxt[180] =
     {   0,
-        4,    5,    6,    7,    8,    9,   10,   10,   10,    4,
+        4,    5,    6,    7,    8,    9,   10,   10,   10,   10,
        11,   12,   13,   14,   15,   16,   17,   18,   19,   19,
        20,   19,   21,   19,   19,   19,   19,   19,   19,   19,
        22,   19,   23,   19,   19,   24,   25,   26,   19,   27,
@@ -431,7 +431,10 @@ char *yytext;
 #line 2 "lex.l"
 int nb_ligne=0;
 #include "synt.tab.h"
-#line 435 "lex.yy.c"
+#include <stdio.h> 
+#include<string.h>
+extern YYSTYPE yylval;
+#line 438 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -582,9 +585,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 10 "lex.l"
+#line 13 "lex.l"
 
-#line 588 "lex.yy.c"
+#line 591 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -669,146 +672,148 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 11 "lex.l"
+#line 14 "lex.l"
 yyterminate();
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 13 "lex.l"
+#line 16 "lex.l"
 return mc_ALGORITHME;
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 14 "lex.l"
+#line 17 "lex.l"
 return mc_type;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 17 "lex.l"
+#line 20 "lex.l"
 return mc_VAR;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 18 "lex.l"
+#line 21 "lex.l"
 return mc_DEBUT;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 19 "lex.l"
+#line 22 "lex.l"
 return mc_FIN;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 21 "lex.l"
+#line 24 "lex.l"
 return mc_Pour;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 22 "lex.l"
+#line 25 "lex.l"
 return mc_jusque;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 23 "lex.l"
+#line 26 "lex.l"
 return mc_Faire;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 24 "lex.l"
+#line 27 "lex.l"
 return mc_Fait;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 25 "lex.l"
+#line 28 "lex.l"
 return mc_SI;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 27 "lex.l"
+#line 30 "lex.l"
 return op_AFF;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 28 "lex.l"
+#line 31 "lex.l"
 return op_comp;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 29 "lex.l"
-return op_arith;
+#line 32 "lex.l"
+{yylval.chaine=strdup(yytext);
+		return op_arith;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 30 "lex.l"
+#line 34 "lex.l"
 return bar;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 32 "lex.l"
+#line 37 "lex.l"
 {if (yyleng >12) printf ("erreur , il faut moins de 12 car") ;
-        else return identificateur;}
+        else {yylval.chaine=strdup(yytext);
+        return identificateur;}}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 34 "lex.l"
-return constante;
+#line 41 "lex.l"
+{yylval.entier=atoi(yytext);return constante;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 36 "lex.l"
+#line 44 "lex.l"
 return parenthese_gauche;
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 37 "lex.l"
+#line 45 "lex.l"
 return parenthese_droite;
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 38 "lex.l"
+#line 46 "lex.l"
 
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 40 "lex.l"
+#line 48 "lex.l"
 
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 41 "lex.l"
+#line 49 "lex.l"
 {nb_ligne++;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 42 "lex.l"
+#line 50 "lex.l"
 return dp;
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 43 "lex.l"
+#line 51 "lex.l"
 return pvg;
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 44 "lex.l"
+#line 52 "lex.l"
 return crochet_gauche;
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 45 "lex.l"
+#line 53 "lex.l"
 return crochet_droit;
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 47 "lex.l"
+#line 55 "lex.l"
 printf("erreur lexicale à la ligne %d \n",nb_ligne) ;
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 50 "lex.l"
+#line 56 "lex.l"
 ECHO;
 	YY_BREAK
-#line 812 "lex.yy.c"
+#line 817 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1694,4 +1699,4 @@ int main()
 	return 0;
 	}
 #endif
-#line 50 "lex.l"
+#line 56 "lex.l"

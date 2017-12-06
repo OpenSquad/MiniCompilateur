@@ -1,6 +1,9 @@
 %{
 int nb_ligne=0;
 #include "synt.tab.h"
+#include <stdio.h> 
+#include<string.h>
+extern YYSTYPE yylval;
 %}
 
 lettre [a-zA-Z]
@@ -26,12 +29,17 @@ SI return mc_SI;
 
 "<--" return op_AFF;
 !=|=|<|>|<=|>= return op_comp;
-[+*/-] return op_arith;
+[+*-/] {yylval.chaine=strdup(yytext);
+		return op_arith;}
 \| return bar;
 
+
 {idf} {if (yyleng >12) printf ("erreur , il faut moins de 12 car") ;
-        else return identificateur;}
-{const} return constante;
+        else {yylval.chaine=strdup(yytext);
+        return identificateur;}}
+		
+{const} {yylval.entier=atoi(yytext);return constante;}
+
 															
 "(" return parenthese_gauche;
 ")" return parenthese_droite;
@@ -45,5 +53,3 @@ SI return mc_SI;
 "]" return crochet_droit;
 
 . printf("erreur lexicale à la ligne %d \n",nb_ligne) ;
-
-
