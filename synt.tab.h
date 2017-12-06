@@ -58,12 +58,13 @@
      parenthese_gauche = 274,
      parenthese_droite = 275,
      identificateur = 276,
-     constante = 277,
-     commentaire = 278,
-     dp = 279,
-     pvg = 280,
-     crochet_gauche = 281,
-     crochet_droit = 282
+     const_entier = 277,
+     const_reel = 278,
+     const_chaine = 279,
+     dp = 280,
+     pvg = 281,
+     crochet_gauche = 282,
+     crochet_droit = 283
    };
 #endif
 
@@ -77,11 +78,12 @@ typedef union YYSTYPE
 #line 8 "synt.y"
 
 int entier;
+float reel;
 char* chaine;
 
 
 /* Line 1676 of yacc.c  */
-#line 85 "synt.tab.h"
+#line 87 "synt.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

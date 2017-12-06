@@ -1,3 +1,10 @@
+constEntier [0-9]*
+constReel [0-9]+\.[0-9]+
+
+"//".*
+
+
+
 structure_generale:dec_algo mc_VAR partieDeclaration mc_DEBUT partieInstruction mc_FIN {printf("correcte");}
 ;
 
@@ -55,3 +62,10 @@ cond: identificateur op_comp constante
 //------------------Instruction Affectation-----------
 inst_aff: identificateur op_AFF exp_arith pvg 
 
+exp_arith: exp_arith op_arith identificateur  { if ( $3==0 && strcmp("/",$2)==0) printf(" erreur : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1); }
+           |exp_arith op_arith const_reel  { if ( $3==0 && strcmp("/",$2)==0) printf(" erreur : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1); }
+		   |exp_arith op_arith const_entier  { if ( $3==0 && strcmp("/",$2)==0) printf(" erreur : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1); }
+		   |identificateur
+		   |const_reel
+		   |const_entier
+;
