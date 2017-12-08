@@ -16,7 +16,7 @@ char* chaine;}
 
 %%
 
-structure_generale:dec_algo mc_VAR partieDeclaration mc_DEBUT partieInstruction mc_FIN {printf("correcte");}
+structure_generale:dec_algo mc_VAR partieDeclaration mc_DEBUT partieInstruction mc_FIN {printf("----------programme syntaxiquement juste------\n ecrire quelque chose puis appuyer sur entre pour afficher la table des symboles");}
 ;
 
 
@@ -35,24 +35,24 @@ partieDeclaration: dec_var2 partieDeclaration
 ;
 
 //----------------les declarations------------
-dec_tableau: identificateur crochet_gauche const_entier crochet_droit dp mc_entier pvg 
-	         |identificateur crochet_gauche const_entier crochet_droit dp mc_reel pvg
-			 |identificateur crochet_gauche const_entier crochet_droit dp mc_chaine pvg
+dec_tableau: identificateur crochet_gauche const_entier crochet_droit dp mc_entier pvg {inserer($1,"entier",1);}
+	         |identificateur crochet_gauche const_entier crochet_droit dp mc_reel pvg   {inserer($1,"reel",1);}
+			 |identificateur crochet_gauche const_entier crochet_droit dp mc_chaine pvg  {inserer($1,"chaine",1);}
 ;
 
-dec_var2: mc_entier ListeIDF pvg
-		 | mc_reel ListeIDF pvg
-		 | mc_chaine ListeIDF pvg
+dec_var2: mc_entier ListeIDF pvg {inserer($3,"entier",1);}
+		 | mc_reel ListeIDF pvg   {inserer($3,"reel",1);}
+		 | mc_chaine ListeIDF pvg  {inserer($3,"chaine",1);}
 ;
 
-dec_var: identificateur dp mc_entier pvg 
-	     |identificateur dp mc_reel pvg 
-         | identificateur dp mc_chaine pvg 
+dec_var: identificateur dp mc_entier pvg {inserer($1,"entier",1);}
+	     |identificateur dp mc_reel pvg  {inserer($1,"reel",1);}
+         | identificateur dp mc_chaine pvg {inserer($1,"chaine",1);}
 ;
 
 
-ListeIDF: identificateur bar ListeIDF
-			           | identificateur
+ListeIDF: identificateur bar ListeIDF {if(recherche($1)!=-1) printf("-----------ERREUR:semantique - la variable: %s deja declare ligne %d  \n ",$1,nb_ligne,"------------");}
+			           | identificateur  {if(recherche($1)!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare ligne %d  \n ",$1,nb_ligne,"------------");}
 ;
 					   
 //------------------PartieInstruction---------------------
@@ -86,9 +86,9 @@ cond: identificateur op_comp constante
 //------------------Instruction Affectation-----------
 inst_aff: identificateur op_AFF exp_arith pvg 
 
-exp_arith: exp_arith op_arith identificateur  { if ( $3==0 && strcmp("/",$2)==0) printf(" erreur : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1); }
-           |exp_arith op_arith const_reel  { if ( $3==0 && strcmp("/",$2)==0) printf(" erreur : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1); }
-		   |exp_arith op_arith const_entier  { if ( $3==0 && strcmp("/",$2)==0) printf(" erreur : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1); }
+exp_arith: exp_arith op_arith identificateur  { if ( $3==0 && strcmp("/",$2)==0) printf("ERREUR SEMANTIQUE : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1); }
+           |exp_arith op_arith const_reel  { if ( $3==0 && strcmp("/",$2)==0) printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1); }
+		   |exp_arith op_arith const_entier  { if ( $3==0 && strcmp("/",$2)==0) printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1); }
 		   |identificateur
 		   |const_reel
 		   |const_entier

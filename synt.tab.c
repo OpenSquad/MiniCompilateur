@@ -1437,34 +1437,111 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 19 "synt.y"
-    {printf("correcte");;}
+    {printf("----------programme syntaxiquement juste------\n ecrire quelque chose puis appuyer sur entre pour afficher la table des symboles");;}
+    break;
+
+  case 10:
+
+/* Line 1455 of yacc.c  */
+#line 38 "synt.y"
+    {inserer((yyvsp[(1) - (7)].chaine),"entier",1);;}
+    break;
+
+  case 11:
+
+/* Line 1455 of yacc.c  */
+#line 39 "synt.y"
+    {inserer((yyvsp[(1) - (7)].chaine),"reel",1);;}
+    break;
+
+  case 12:
+
+/* Line 1455 of yacc.c  */
+#line 40 "synt.y"
+    {inserer((yyvsp[(1) - (7)].chaine),"chaine",1);;}
+    break;
+
+  case 13:
+
+/* Line 1455 of yacc.c  */
+#line 43 "synt.y"
+    {inserer((yyvsp[(3) - (3)].chaine),"entier",1);;}
+    break;
+
+  case 14:
+
+/* Line 1455 of yacc.c  */
+#line 44 "synt.y"
+    {inserer((yyvsp[(3) - (3)].chaine),"reel",1);;}
+    break;
+
+  case 15:
+
+/* Line 1455 of yacc.c  */
+#line 45 "synt.y"
+    {inserer((yyvsp[(3) - (3)].chaine),"chaine",1);;}
+    break;
+
+  case 16:
+
+/* Line 1455 of yacc.c  */
+#line 48 "synt.y"
+    {inserer((yyvsp[(1) - (4)].chaine),"entier",1);;}
+    break;
+
+  case 17:
+
+/* Line 1455 of yacc.c  */
+#line 49 "synt.y"
+    {inserer((yyvsp[(1) - (4)].chaine),"reel",1);;}
+    break;
+
+  case 18:
+
+/* Line 1455 of yacc.c  */
+#line 50 "synt.y"
+    {inserer((yyvsp[(1) - (4)].chaine),"chaine",1);;}
+    break;
+
+  case 19:
+
+/* Line 1455 of yacc.c  */
+#line 54 "synt.y"
+    {if(recherche((yyvsp[(1) - (3)].chaine))!=-1) printf("-----------ERREUR:semantique - la variable: %s deja declare ligne %d  \n ",(yyvsp[(1) - (3)].chaine),nb_ligne,"------------");;}
+    break;
+
+  case 20:
+
+/* Line 1455 of yacc.c  */
+#line 55 "synt.y"
+    {if(recherche((yyvsp[(1) - (1)].chaine))!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare ligne %d  \n ",(yyvsp[(1) - (1)].chaine),nb_ligne,"------------");;}
     break;
 
   case 35:
 
 /* Line 1455 of yacc.c  */
 #line 89 "synt.y"
-    { if ( (yyvsp[(3) - (3)].chaine)==0 && strcmp("/",(yyvsp[(2) - (3)].chaine))==0) printf(" erreur : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1); ;}
+    { if ( (yyvsp[(3) - (3)].chaine)==0 && strcmp("/",(yyvsp[(2) - (3)].chaine))==0) printf("ERREUR SEMANTIQUE : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1); ;}
     break;
 
   case 36:
 
 /* Line 1455 of yacc.c  */
 #line 90 "synt.y"
-    { if ( (yyvsp[(3) - (3)].reel)==0 && strcmp("/",(yyvsp[(2) - (3)].chaine))==0) printf(" erreur : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1); ;}
+    { if ( (yyvsp[(3) - (3)].reel)==0 && strcmp("/",(yyvsp[(2) - (3)].chaine))==0) printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1); ;}
     break;
 
   case 37:
 
 /* Line 1455 of yacc.c  */
 #line 91 "synt.y"
-    { if ( (yyvsp[(3) - (3)].entier)==0 && strcmp("/",(yyvsp[(2) - (3)].chaine))==0) printf(" erreur : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1); ;}
+    { if ( (yyvsp[(3) - (3)].entier)==0 && strcmp("/",(yyvsp[(2) - (3)].chaine))==0) printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1); ;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1468 "synt.tab.c"
+#line 1545 "synt.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);

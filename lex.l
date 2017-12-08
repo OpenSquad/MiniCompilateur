@@ -40,7 +40,7 @@ SI {nb_colonne+=yyleng; return mc_SI; }
 
 
 {idf} {if (yyleng >12) printf ("erreur , il faut moins de 12 car") ;
-        else {yylval.chaine=strdup(yytext);	nb_colonne+=yyleng; inserer(yytext,"idf",1); return identificateur;}}
+        else {yylval.chaine=strdup(yytext);	nb_colonne+=yyleng; return identificateur;}}
 		
 {constEntier} {yylval.entier=atoi(yytext); nb_colonne+=yyleng; return const_entier;}
 {constReel} {yylval.reel=atof(yytext); nb_colonne+=yyleng; return const_reel;}

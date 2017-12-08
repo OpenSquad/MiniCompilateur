@@ -771,7 +771,7 @@ case 18:
 YY_RULE_SETUP
 #line 42 "lex.l"
 {if (yyleng >12) printf ("erreur , il faut moins de 12 car") ;
-        else {yylval.chaine=strdup(yytext);	nb_colonne+=yyleng; inserer(yytext,"idf",1); return identificateur;}}
+        else {yylval.chaine=strdup(yytext);	nb_colonne+=yyleng; return identificateur;}}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
