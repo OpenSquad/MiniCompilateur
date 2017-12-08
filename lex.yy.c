@@ -824,7 +824,7 @@ YY_RULE_SETUP
 case 4:
 YY_RULE_SETUP
 #line 22 "lex.l"
-{yylval.chaine=strdup(yytext);nb_colonne+=yyleng; return mc_reel;  }
+{yylval.chaine=strdup(yytext);nb_colonne+=yyleng; return mc_reel;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP

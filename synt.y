@@ -1,9 +1,10 @@
 %{ 
 #include <stdio.h> 
 #include<string.h>
+#include "ts.h"
 extern nb_ligne;
 extern nb_colonne;
-char[20] type,typeAff;
+char* type,typeAff;
 %}
 
 %union {
@@ -11,7 +12,7 @@ int entier;
 float reel;
 char* chaine;}
 
-%token  mc_ALGORITHME mc_entier mc_reel mc_chaine mc_VAR mc_DEBUT mc_FIN mc_Pour mc_jusque mc_Faire mc_Fait mc_SI op_AFF op_comp <chaine>op_arith bar parenthese_gauche parenthese_droite <chaine>identificateur <entier>const_entier <reel>const_reel <chaine>const_chaine dp pvg crochet_gauche crochet_droit  constEntier 
+%token  mc_ALGORITHME <entier>mc_entier <reel>mc_reel <chaine>mc_chaine mc_VAR mc_DEBUT mc_FIN mc_Pour mc_jusque mc_Faire mc_Fait mc_SI op_AFF op_comp <chaine>op_arith bar parenthese_gauche parenthese_droite <chaine>identificateur <entier>const_entier <reel>const_reel <chaine>const_chaine dp pvg crochet_gauche crochet_droit  constEntier 
 
 
 %%
@@ -35,9 +36,9 @@ partieDeclaration: dec_var2 partieDeclaration
 ;
 
 //----------------les declarations------------
-dec_tableau: identificateur crochet_gauche constEntier crochet_droit dp mc_entier pvg {inserer($6,$1,$3)}
-	         |identificateur crochet_gauche constEntier crochet_droit dp mc_reel pvg {inserer($6,$1,$3)}
-			 |identificateur crochet_gauche constEntier crochet_droit dp mc_chaine pvg {inserer($6,$1,$3)}
+dec_tableau: identificateur crochet_gauche constEntier crochet_droit dp mc_entier pvg {inserer("entier",$1,$3);}
+	         |identificateur crochet_gauche constEntier crochet_droit dp mc_reel pvg {inserer("reel",$1,$3);}
+			 |identificateur crochet_gauche constEntier crochet_droit dp mc_chaine pvg {inserer("chaine",$1,$3);}
 ;
 
 dec_var2: mc_entier ListeIDF pvg {type="entier";}
@@ -45,9 +46,9 @@ dec_var2: mc_entier ListeIDF pvg {type="entier";}
 		 | mc_chaine ListeIDF pvg {type="chaine";}
 ;
 
-dec_var: identificateur dp mc_entier pvg  {inserer($3,$1,1);}
-	     |identificateur dp mc_reel pvg  {inserer($3,$1,1);}
-         | identificateur dp mc_chaine pvg  {inserer($3,$1,1);}
+dec_var: identificateur dp mc_entier pvg  {inserer("entier",$1,1);}
+	     |identificateur dp mc_reel pvg  {inserer("reel",$1,1);}
+         | identificateur dp mc_chaine pvg  {inserer("chaine",$1,1);}
 ;
 
 
@@ -96,9 +97,9 @@ exp_arith: exp_arith op_arith identificateur  { if ( $3==0 && strcmp("/",$2)==0)
 ;
 
 //----------------constante = entier ou reel ou chaine -----------------
-constante: const_entier
-		   | const_reel		
-		   | const_chaine   
+constante: const_entier {type="entier";}
+		   | const_reel		{type="reel";}
+		   | const_chaine   {type="chaine";}
 ;
 
 %%

@@ -3,7 +3,7 @@ typedef struct
 {
 char NomEntite[20];
 int TailleEntite;
-Char TypeEntite[20];
+char TypeEntite[20];
 }TypeTS;
 
 TypeTS ts[100];
