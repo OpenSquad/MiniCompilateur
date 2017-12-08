@@ -3,6 +3,7 @@
 #include<string.h>
 extern nb_ligne;
 extern nb_colonne;
+char[20] type;
 %}
 
 %union {
@@ -34,24 +35,24 @@ partieDeclaration: dec_var2 partieDeclaration
 ;
 
 //----------------les declarations------------
-dec_tableau: identificateur crochet_gauche constante crochet_droit dp mc_entier pvg 
-	         |identificateur crochet_gauche constante crochet_droit dp mc_reel pvg
-			 |identificateur crochet_gauche constante crochet_droit dp mc_chaine pvg
+dec_tableau: identificateur crochet_gauche constante crochet_droit dp mc_entier pvg {inserer($6,$1,$3)}
+	         |identificateur crochet_gauche constante crochet_droit dp mc_reel pvg {inserer($6,$1,$3)}
+			 |identificateur crochet_gauche constante crochet_droit dp mc_chaine pvg {inserer($6,$1,$3)}
 ;
 
-dec_var2: mc_entier ListeIDF pvg
-		 | mc_reel ListeIDF pvg
-		 | mc_chaine ListeIDF pvg
+dec_var2: mc_entier ListeIDF pvg {type="entier";}
+		 | mc_reel ListeIDF pvg {type="reel";}
+		 | mc_chaine ListeIDF pvg {type="chaine";}
 ;
 
-dec_var: identificateur dp mc_entier pvg 
-	     |identificateur dp mc_reel pvg 
-         | identificateur dp mc_chaine pvg 
+dec_var: identificateur dp mc_entier pvg  {inserer($3,$1,1);}
+	     |identificateur dp mc_reel pvg  {inserer($3,$1,1);}
+         | identificateur dp mc_chaine pvg  {inserer($3,$1,1);}
 ;
 
 
-ListeIDF: identificateur bar ListeIDF
-			           | identificateur
+ListeIDF: identificateur bar ListeIDF {inserer(type,$1,1);}
+			           | identificateur {inserer(type,$1,1);}
 ;
 					   
 //------------------PartieInstruction---------------------
