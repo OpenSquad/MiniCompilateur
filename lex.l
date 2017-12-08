@@ -18,8 +18,8 @@ constChaine \"([^\"]*)*\"
 stop yyterminate();
 
 ALGORITHME {nb_colonne+=yyleng;return mc_ALGORITHME;}
-entier {nb_colonne+=yyleng;yylval.chaine=strdup(yytext); return mc_entier;}
-reel  {yylval.chaine=strdup(yytext);nb_colonne+=yyleng; return mc_reel;}
+entier {yylval.chaine=strdup(yytext);nb_colonne+=yyleng; return mc_entier;}
+reel  {yylval.chaine=strdup(yytext);nb_colonne+=yyleng; return mc_reel;  }
 chaine {yylval.chaine=strdup(yytext);nb_colonne+=yyleng; return mc_chaine;}
 
 VAR {nb_colonne+=yyleng;return mc_VAR;}
@@ -40,7 +40,7 @@ SI {nb_colonne+=yyleng; return mc_SI; }
 
 
 {idf} {if (yyleng >12) printf ("erreur , il faut moins de 12 car") ;
-        else {yylval.chaine=strdup(yytext);	nb_colonne+=yyleng; return identificateur;}}
+        else {yylval.chaine=strdup(yytext);	nb_colonne+=yyleng; inserer(yytext,"idf",1); return identificateur;}}
 		
 {constEntier} {yylval.entier=atoi(yytext); nb_colonne+=yyleng; return const_entier;}
 {constReel} {yylval.reel=atof(yytext); nb_colonne+=yyleng; return const_reel;}

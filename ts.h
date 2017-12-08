@@ -1,3 +1,6 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
 //structure de la table de symbole
 typedef struct
 {
@@ -22,12 +25,12 @@ int recherche(char entite[])
 	return -1;
 }
 
-void inserer(char type[], char entite[], int taille[])
+void inserer(char nom[], char type[], int taille)
 {
 
-	if ( recherche(entite)==-1)
+	if ( recherche(nom)==-1)
 	{
-		strcpy(ts[CpTabSym].NomEntite,entite); 
+		strcpy(ts[CpTabSym].NomEntite,nom); 
 		ts[CpTabSym].TailleEntite=taille;;
 		strcpy(ts[CpTabSym].TypeEntite,type);
 		CpTabSym++;
@@ -38,12 +41,12 @@ void afficher ()
 {
 	printf("\n/***************Table des symboles ******************/\n");
 	printf("________________________\n");
-	printf("\t| NomEntite |  TypeEntite \n");
+	printf("\t| NomEntite |TypeEntite|TailleEntite \n");
 	printf("________________________\n");
 	int i=0;
 	while(i<CpTabSym)
   	{
-    	printf("\t|%10s |%12s  |\n",ts[i].NomEntite,ts[i].TypeEntite,ts[i].TailleEntite);
+    	printf("\t|%10s |%12s  | %d\n",ts[i].NomEntite,ts[i].TypeEntite,ts[i].TailleEntite);
     	i++;
    	}
 }
