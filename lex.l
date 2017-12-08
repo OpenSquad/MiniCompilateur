@@ -1,5 +1,5 @@
 %{
-int nb_ligne=1,nb_colonne=1;
+extern int nb_ligne=1,nb_colonne=1;
 
 #include "synt.tab.h"
 #include <stdio.h> 
