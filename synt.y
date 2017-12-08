@@ -11,7 +11,7 @@ int entier;
 float reel;
 char* chaine;}
 
-%token  mc_ALGORITHME mc_entier mc_reel mc_chaine mc_VAR mc_DEBUT mc_FIN mc_Pour mc_jusque mc_Faire mc_Fait mc_SI op_AFF op_comp <chaine>op_arith bar parenthese_gauche parenthese_droite <chaine>identificateur <entier>const_entier <reel>const_reel <chaine>const_chaine dp pvg crochet_gauche crochet_droit 
+%token  mc_ALGORITHME mc_entier mc_reel mc_chaine mc_VAR mc_DEBUT mc_FIN mc_Pour mc_jusque mc_Faire mc_Fait mc_SI op_AFF op_comp <chaine>op_arith bar parenthese_gauche parenthese_droite <chaine>identificateur <entier>const_entier <reel>const_reel <chaine>const_chaine dp pvg crochet_gauche crochet_droit  constEntier 
 
 
 %%
@@ -35,9 +35,9 @@ partieDeclaration: dec_var2 partieDeclaration
 ;
 
 //----------------les declarations------------
-dec_tableau: identificateur crochet_gauche constante crochet_droit dp mc_entier pvg {inserer($6,$1,$3)}
-	         |identificateur crochet_gauche constante crochet_droit dp mc_reel pvg {inserer($6,$1,$3)}
-			 |identificateur crochet_gauche constante crochet_droit dp mc_chaine pvg {inserer($6,$1,$3)}
+dec_tableau: identificateur crochet_gauche constEntier crochet_droit dp mc_entier pvg {inserer($6,$1,$3)}
+	         |identificateur crochet_gauche constEntier crochet_droit dp mc_reel pvg {inserer($6,$1,$3)}
+			 |identificateur crochet_gauche constEntier crochet_droit dp mc_chaine pvg {inserer($6,$1,$3)}
 ;
 
 dec_var2: mc_entier ListeIDF pvg {type="entier";}

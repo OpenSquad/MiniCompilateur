@@ -19,7 +19,7 @@ stop yyterminate();
 
 ALGORITHME {nb_colonne+=yyleng;return mc_ALGORITHME;}
 entier {nb_colonne+=yyleng;yylval.chaine=strdup(yytext); return mc_entier;}
-reel  {yylval.chaine=strdup(yytext);nb_colonne+=yyleng; return mc_reel;  }
+reel  {yylval.chaine=strdup(yytext);nb_colonne+=yyleng; return mc_reel;}
 chaine {yylval.chaine=strdup(yytext);nb_colonne+=yyleng; return mc_chaine;}
 
 VAR {nb_colonne+=yyleng;return mc_VAR;}
