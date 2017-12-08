@@ -48,7 +48,8 @@ SI {nb_colonne+=yyleng; return mc_SI; }
 	
 "(" {nb_colonne+=yyleng; return parenthese_gauche;}
 ")" {nb_colonne+=yyleng; return parenthese_droite;}
-"/*"([^*]*("*"+[^*/])*)*"*"+"/" 
+"/*"([^*]*("*"+[^*/])*)*"*"+"/" {nb_colonne+=yyleng;}
+"//"(.)* 
 
 [ \t] nb_colonne+=yyleng;
 \n {nb_ligne++;nb_colonne=1;}
