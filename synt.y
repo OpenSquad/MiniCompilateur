@@ -3,7 +3,7 @@
 #include<string.h>
 extern nb_ligne;
 extern nb_colonne;
-char[20] type;
+char[20] type,typeAff;
 %}
 
 %union {
@@ -84,19 +84,21 @@ cond: identificateur op_comp constante
 
 
 //------------------Instruction Affectation-----------
-inst_aff: identificateur op_AFF exp_arith pvg 
-
-exp_arith: exp_arith op_arith identificateur  { if ( $3==0 && strcmp("/",$2)==0) printf(" erreur : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1); }
-           |exp_arith op_arith const_reel  { if ( $3==0 && strcmp("/",$2)==0) printf(" erreur : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1); }
-		   |exp_arith op_arith const_entier  { if ( $3==0 && strcmp("/",$2)==0) printf(" erreur : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1); }
-		   |identificateur
-		   |const_reel
-		   |const_entier
+inst_aff: identificateur op_AFF exp_arith pvg {if(recherche($1)!=-1 && ts[recherche($1)].TypeEntite==typeAff) printf("Succés affectation");} 
+;
+exp_arith: exp_arith op_arith identificateur  { if ( $3==0 && strcmp("/",$2)==0) {printf(" erreur : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1); } else typeAff=typeAff=ts[recherche($3)].TypeEntite;}
+           |exp_arith op_arith const_reel  { if ( $3==0 && strcmp("/",$2)==0) {printf(" erreur : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1); } else {typeAff="reel";}}
+		   |exp_arith op_arith const_entier  { if ( $3==0 && strcmp("/",$2)==0) {printf(" erreur : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);} else {typeAff="entier";} }
+		   |identificateur {typeAff=ts[recherche($1)].TypeEntite;}
+		   |const_reel {typeAff="reel";}
+		   |const_entier {typeAff="entier";}
+		   | const_chaine {typeAff="chaine";}
 ;
 
-//----------------constante = entier ou reel -----------------
+//----------------constante = entier ou reel ou chaine -----------------
 constante: const_entier
-		   | const_reel		   
+		   | const_reel		
+		   | const_chaine   
 ;
 
 %%
