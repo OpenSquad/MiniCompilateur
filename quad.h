@@ -10,7 +10,7 @@ qdr quad[1000];
 extern int qc;
 
 
-void quadr(ccar opr[],ccar op1[],ccar op2[],ccar res[])
+void quadr(char opr[],char op1[],char op2[],char res[])
 {
 	strcpy(quad[qc].oper,opr);
 	strcpy(quad[qc].op1,op1);
@@ -19,7 +19,7 @@ void quadr(ccar opr[],ccar op1[],ccar op2[],ccar res[])
 	qc++;
 }
 
-void ajour_quad(int num_quad, int colon_quad, ccar val [])
+void ajour_quad(int num_quad, int colon_quad, char val [])
 {
 	if (colon_quad==0)    
 		strcpy(quad[num_quad].oper ,  val);
@@ -34,7 +34,7 @@ void ajour_quad(int num_quad, int colon_quad, ccar val [])
 
 void afccer_qdr()
 {
-	printf("*********************LesQuadruplets***********************\n");
+	printf("/*********************Les Quadruplets***********************/\n");
 	int i;
 	for(i=0;i<qc;i++)
 	{

@@ -33,7 +33,7 @@ Fait {nb_colonne+=yyleng; return mc_Fait;}
 SI {nb_colonne+=yyleng; return mc_SI; }
 
 "<--" {nb_colonne+=yyleng;return op_AFF; }
-!=|=|<|>|<=|>= {nb_colonne+=yyleng; return op_comp;}
+!=|=|<|>|<=|>= {yylval.chaine=strdup(yytext);nb_colonne+=yyleng; return op_comp;}
 [+*-/] {yylval.chaine=strdup(yytext); nb_colonne+=yyleng;
 		return op_arith; }
 \| {nb_colonne+=yyleng; return bar;}

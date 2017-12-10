@@ -2,8 +2,14 @@
 #include <stdio.h> 
 #include<string.h>
 #include "ts.h"
+#include "quad.h"
 extern nb_ligne;
 extern nb_colonne;
+int t=0; // Compteur des états temporaires
+int qc=0;
+char tmp[20],tmp2[20],tmp3[20],type[20];
+int x=0;
+
 %}
 
 %union {
@@ -11,12 +17,12 @@ int entier;
 float reel;
 char* chaine;}
 
-%token  mc_ALGORITHME <chaine>mc_entier <chaine>mc_reel <chaine>mc_chaine mc_VAR mc_DEBUT mc_FIN mc_Pour mc_jusque mc_Faire mc_Fait mc_SI op_AFF op_comp <chaine>op_arith bar parenthese_gauche parenthese_droite <chaine>identificateur <entier>const_entier <reel>const_reel <chaine>const_chaine dp pvg crochet_gauche crochet_droit 
+%token  mc_ALGORITHME <chaine>mc_entier <chaine>mc_reel <chaine>mc_chaine mc_VAR mc_DEBUT mc_FIN mc_Pour mc_jusque mc_Faire mc_Fait mc_SI op_AFF <chaine>op_comp <chaine>op_arith bar parenthese_gauche parenthese_droite <chaine>identificateur <entier>const_entier <reel>const_reel <chaine>const_chaine dp pvg crochet_gauche crochet_droit 
 
 
 %%
 
-structure_generale:dec_algo mc_VAR partieDeclaration mc_DEBUT partieInstruction mc_FIN {printf("----------programme syntaxiquement juste------\n ecrire quelque chose puis appuyer sur entre pour afficher la table des symboles");}
+structure_generale:dec_algo mc_VAR partieDeclaration mc_DEBUT partieInstruction mc_FIN {printf("----------programme syntaxiquement juste------\n ecrire quelque chose puis appuyer sur entre pour afficher la table des symboles et des quadruplets");}
 ;
 
 
@@ -35,9 +41,9 @@ partieDeclaration: dec_var2 partieDeclaration
 ;
 
 //----------------les declarations------------
-dec_tableau: identificateur crochet_gauche const_entier crochet_droit dp mc_entier pvg {inserer($1,"entier",1);}
-	         |identificateur crochet_gauche const_entier crochet_droit dp mc_reel pvg   {inserer($1,"reel",1);}
-			 |identificateur crochet_gauche const_entier crochet_droit dp mc_chaine pvg  {inserer($1,"chaine",1);}
+dec_tableau: identificateur crochet_gauche const_entier crochet_droit dp mc_entier pvg {inserer($1,"entier",$3);}
+	         |identificateur crochet_gauche const_entier crochet_droit dp mc_reel pvg   {inserer($1,"reel",$3);}
+			 |identificateur crochet_gauche const_entier crochet_droit dp mc_chaine pvg  {inserer($1,"chaine",$3);}
 ;
 
 dec_var2: mc_entier ListeIDF pvg {inserer($3,"entier",1);}
@@ -74,37 +80,50 @@ inst_boucle: mc_Pour identificateur op_AFF identificateur mc_jusque identificate
 
 //------------------Instruction Condition-------------
 inst_cond:mc_Faire inst_aff mc_SI parenthese_gauche cond parenthese_droite 
-;
+; 
 
 //------------------Condition-------------
-cond: identificateur op_comp constante 
-				             		     
-	 | constante op_comp constante					     	 
-;
+cond: identificateur op_comp const_entier {t=t+1;sprintf(tmp,"%d",$3);quadr($2,$1,tmp," ");}
+	 | identificateur op_comp const_reel {t=t+1;sprintf(tmp, "%d",$3 );quadr($2,$1,tmp," ");}     		     
+	 | const_entier op_comp const_entier	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);quadr($2,tmp,tmp2," ");}
+	 | const_entier op_comp const_reel	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);quadr($2,tmp,tmp2," ");}
+	 	 | const_reel op_comp const_entier	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);quadr($2,tmp,tmp2," ");}
+	 | const_reel op_comp const_reel	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);quadr($2,tmp,tmp2," ");}					     	 
+; 
 
 
 //------------------Instruction Affectation-----------
-inst_aff: identificateur op_AFF exp_arith pvg 
-
-exp_arith: exp_arith op_arith identificateur  { if ( $3==0 && strcmp("/",$2)==0) printf("ERREUR SEMANTIQUE : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1); }
-           |exp_arith op_arith const_reel  { if ( $3==0 && strcmp("/",$2)==0) printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1); }
-		   |exp_arith op_arith const_entier  { if ( $3==0 && strcmp("/",$2)==0) printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1); }
-		   |identificateur
-		   |const_reel
-		   |const_entier
+inst_aff: identificateur op_AFF exp_arith pvg {    if(strcmp(ts[recherche($1)].TypeEntite,type)!=0) {printf("-----------Erreur de type d'affectation ! la variable: %s declare commme %s  \n ",$1,ts[recherche($1)].TypeEntite);}
+													else {quadr(":=",$1,tmp2," ");x=0;} }
+; 
+exp_arith: exp_arith op_arith identificateur  { if( $3==0 && strcmp("/",$2)==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);} else {
+															sprintf(tmp,"T%d",t);sprintf(tmp2,"T%d",t+1);quadr($2,tmp,$3,tmp2);t=t+1;}}
+           |exp_arith op_arith const_reel  { 
+           if($3==0 && strcmp("/",$2)==0){printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);}
+            else{sprintf(tmp,"%d",$3);sprintf(tmp3,"T%d",t);sprintf(tmp2,"T%d",t+1);quadr($2,tmp3,tmp,tmp2);t=t+1; }}
+		   |exp_arith op_arith const_entier  { if ( $3==0 && strcmp("/",$2)==0) {printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);}
+		   else { sprintf(tmp,"%d",$3);sprintf(tmp3,"T%d",t);sprintf(tmp2,"T%d",t+1);quadr($2,tmp3,tmp,tmp2);t=t+1;}}
+		   |identificateur {strcpy(type,ts[recherche($1)].TypeEntite);sprintf(tmp2,"%d",$1);}
+		   |const_reel {strcpy(type,"reel");sprintf(tmp2,"%d",$1);}
+		   |const_entier {strcpy(type,"entier");sprintf(tmp2,"%d",$1);}
+		   |const_chaine {strcpy(type,"chaine");strcpy(tmp2,$1);}
 ;
 
 //----------------constante = entier ou reel -----------------
-constante: const_entier
-		   | const_reel		   
+constante: const_entier {strcpy(type,"entier");}
+		   | const_reel {strcpy(type,"reel");}
+		   | const_chaine {strcpy(type,"chaine");}
 ;
 
 %%
-main ()
+int main()
 {
 printf("Taper stop pour arreter \n");
 yyparse();
+printf("\n\n");
 afficher();
-system("pause");
+printf("\n\n");
+afccer_qdr();
+
 
 }
