@@ -93,7 +93,7 @@ cond: identificateur op_comp const_entier {t=t+1;sprintf(tmp,"%d",$3);quadr($2,$
 
 
 //------------------Instruction Affectation-----------
-inst_aff: identificateur op_AFF exp_arith pvg {    if(strcmp(ts[recherche($1)].TypeEntite,type)!=0) {printf("-----------Erreur de type d'affectation ! la variable: %s declare commme %s  \n ",$1,ts[recherche($1)].TypeEntite);}
+inst_aff: identificateur op_AFF exp_arith pvg {    if(strcmp(ts[recherche($1)].TypeEntite,type)!=0) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,$1,ts[recherche($1)].TypeEntite);}
 													else {quadr(":=",$1,tmp2," ");x=0;} }
 ; 
 exp_arith: exp_arith op_arith identificateur  { if( $3==0 && strcmp("/",$2)==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);} else {
