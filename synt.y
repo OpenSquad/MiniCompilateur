@@ -88,7 +88,8 @@ cond: identificateur op_comp const_entier {t=t+1;sprintf(tmp,"%d",$3);quadr($2,$
 	 | const_entier op_comp const_entier	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);quadr($2,tmp,tmp2," ");}
 	 | const_entier op_comp const_reel	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);quadr($2,tmp,tmp2," ");}
 	 	 | const_reel op_comp const_entier	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);quadr($2,tmp,tmp2," ");}
-	 | const_reel op_comp const_reel	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);quadr($2,tmp,tmp2," ");}					     	 
+	 | const_reel op_comp const_reel	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);quadr($2,tmp,tmp2," ");}	
+	 | identificateur op_comp identificateur {t=t+1;sprintf(tmp,"%d",$3);quadr($2,$1,$3," ");}			     	 
 ; 
 
 
