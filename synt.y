@@ -99,9 +99,9 @@ quadr($2,tmp3,$1,tmp);}
 
 //------------------Instruction Affectation-----------
 inst_aff: identificateur op_AFF exp_arith pvg {    if(strcmp(ts[recherche($1)].TypeEntite,type)!=0) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,$1,ts[recherche($1)].TypeEntite);}
-													else {jump=qc;quadr(":=",$1,tmp2," ");x=0;} }
+													else {jump=qc;quadr(":=",$1,"  ",tmp2);x=0;} }
 													|  identificateur op_AFF const_chaine pvg {if(strcmp(ts[recherche($1)].TypeEntite,type)!=0) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,$1,ts[recherche($1)].TypeEntite);}
-													else {strcpy(type,"chaine");strcpy(tmp2,$3);jump=qc;quadr(":=",$1,tmp2," ");x=0;}}
+													else {strcpy(type,"chaine");strcpy(tmp2,$3);jump=qc;quadr(":=",$1," ",tmp2);x=0;}}
 ; 
 exp_arith: exp_arith op_arith identificateur  { if( $3==0 && strcmp("/",$2)==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);} else {
 															sprintf(tmp,"T%d",t);sprintf(tmp2,"T%d",t+1);quadr($2,tmp,$3,tmp2);t=t+1;}}

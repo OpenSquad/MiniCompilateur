@@ -1432,14 +1432,14 @@ quadr((yyvsp[-1].chaine),tmp3,(yyvsp[-2].chaine),tmp);}
   case 39:
 #line 101 "synt.y" /* yacc.c:1646  */
     {    if(strcmp(ts[recherche((yyvsp[-3].chaine))].TypeEntite,type)!=0) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,(yyvsp[-3].chaine),ts[recherche((yyvsp[-3].chaine))].TypeEntite);}
-													else {jump=qc;quadr(":=",(yyvsp[-3].chaine),tmp2," ");x=0;} }
+													else {jump=qc;quadr(":=",(yyvsp[-3].chaine),"  ",tmp2);x=0;} }
 #line 1437 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
 #line 103 "synt.y" /* yacc.c:1646  */
     {if(strcmp(ts[recherche((yyvsp[-3].chaine))].TypeEntite,type)!=0) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,(yyvsp[-3].chaine),ts[recherche((yyvsp[-3].chaine))].TypeEntite);}
-													else {strcpy(type,"chaine");strcpy(tmp2,(yyvsp[-1].chaine));jump=qc;quadr(":=",(yyvsp[-3].chaine),tmp2," ");x=0;}}
+													else {strcpy(type,"chaine");strcpy(tmp2,(yyvsp[-1].chaine));jump=qc;quadr(":=",(yyvsp[-3].chaine)," ",tmp2);x=0;}}
 #line 1444 "synt.tab.c" /* yacc.c:1646  */
     break;
 
