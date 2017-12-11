@@ -74,7 +74,7 @@ int t=0; // Compteur des états temporaires
 int qc=0;
 char tmp[20],tmp2[20],tmp3[20],type[20];
 int x=0;
-
+int jump;
 
 #line 80 "synt.tab.c" /* yacc.c:339  */
 
@@ -471,8 +471,8 @@ static const yytype_uint8 yyrline[] =
        0,    25,    25,    31,    35,    36,    37,    38,    39,    40,
       44,    45,    46,    49,    50,    51,    54,    55,    56,    60,
       61,    65,    66,    67,    68,    69,    70,    75,    76,    77,
-      78,    82,    86,    87,    88,    89,    90,    91,    92,    97,
-     100,   102,   105,   107,   108,   109,   110,   114,   115,   116
+      78,    82,    88,    90,    91,    92,    93,    94,    95,   100,
+     103,   105,   108,   110,   111,   112,   113,   117,   118,   119
 };
 #endif
 
@@ -1384,120 +1384,121 @@ yyreduce:
     break;
 
   case 32:
-#line 86 "synt.y" /* yacc.c:1646  */
-    {t=t+1;sprintf(tmp,"%d",(yyvsp[0].entier));quadr((yyvsp[-1].chaine),(yyvsp[-2].chaine),tmp," ");}
-#line 1390 "synt.tab.c" /* yacc.c:1646  */
+#line 88 "synt.y" /* yacc.c:1646  */
+    {t=t+1;sprintf(tmp,"%d",(yyvsp[0].entier));sprintf(tmp3,"Q%d",jump);
+quadr((yyvsp[-1].chaine),tmp3,(yyvsp[-2].chaine),tmp);}
+#line 1391 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 87 "synt.y" /* yacc.c:1646  */
-    {t=t+1;sprintf(tmp, "%d",(yyvsp[0].reel) );quadr((yyvsp[-1].chaine),(yyvsp[-2].chaine),tmp," ");}
-#line 1396 "synt.tab.c" /* yacc.c:1646  */
+#line 90 "synt.y" /* yacc.c:1646  */
+    {t=t+1;sprintf(tmp,"%d",(yyvsp[0].reel) );sprintf(tmp3,"Q%d",jump);quadr((yyvsp[-1].chaine),tmp3,(yyvsp[-2].chaine),tmp);}
+#line 1397 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 88 "synt.y" /* yacc.c:1646  */
-    {t=t+1;sprintf(tmp,"%d",(yyvsp[-2].entier));sprintf(tmp2,"%d",(yyvsp[0].entier));quadr((yyvsp[-1].chaine),tmp,tmp2," ");}
-#line 1402 "synt.tab.c" /* yacc.c:1646  */
+#line 91 "synt.y" /* yacc.c:1646  */
+    {t=t+1;sprintf(tmp,"%d",(yyvsp[-2].entier));sprintf(tmp2,"%d",(yyvsp[0].entier));sprintf(tmp3,"Q%d",jump);quadr((yyvsp[-1].chaine),tmp3,(yyvsp[-2].entier),tmp);}
+#line 1403 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 89 "synt.y" /* yacc.c:1646  */
-    {t=t+1;sprintf(tmp,"%d",(yyvsp[-2].entier));sprintf(tmp2,"%d",(yyvsp[0].reel));quadr((yyvsp[-1].chaine),tmp,tmp2," ");}
-#line 1408 "synt.tab.c" /* yacc.c:1646  */
+#line 92 "synt.y" /* yacc.c:1646  */
+    {t=t+1;sprintf(tmp,"%d",(yyvsp[-2].entier));sprintf(tmp2,"%d",(yyvsp[0].reel));sprintf(tmp3,"Q%d",jump);quadr((yyvsp[-1].chaine),tmp3,(yyvsp[-2].entier),tmp);}
+#line 1409 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 90 "synt.y" /* yacc.c:1646  */
-    {t=t+1;sprintf(tmp,"%d",(yyvsp[-2].reel));sprintf(tmp2,"%d",(yyvsp[0].entier));quadr((yyvsp[-1].chaine),tmp,tmp2," ");}
-#line 1414 "synt.tab.c" /* yacc.c:1646  */
+#line 93 "synt.y" /* yacc.c:1646  */
+    {t=t+1;sprintf(tmp,"%d",(yyvsp[-2].reel));sprintf(tmp2,"%d",(yyvsp[0].entier));sprintf(tmp2,"%d",(yyvsp[0].entier));sprintf(tmp3,"Q%d",jump);quadr((yyvsp[-1].chaine),tmp3,tmp2,tmp);}
+#line 1415 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 91 "synt.y" /* yacc.c:1646  */
-    {t=t+1;sprintf(tmp,"%d",(yyvsp[-2].reel));sprintf(tmp2,"%d",(yyvsp[0].reel));quadr((yyvsp[-1].chaine),tmp,tmp2," ");}
-#line 1420 "synt.tab.c" /* yacc.c:1646  */
+#line 94 "synt.y" /* yacc.c:1646  */
+    {t=t+1;sprintf(tmp,"%d",(yyvsp[-2].reel));sprintf(tmp2,"%d",(yyvsp[0].reel));sprintf(tmp3,"Q%d",jump);quadr((yyvsp[-1].chaine),tmp3,tmp,tmp2);}
+#line 1421 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 92 "synt.y" /* yacc.c:1646  */
-    {t=t+1;sprintf(tmp,"%d",(yyvsp[0].chaine));quadr((yyvsp[-1].chaine),(yyvsp[-2].chaine),(yyvsp[0].chaine)," ");}
-#line 1426 "synt.tab.c" /* yacc.c:1646  */
+#line 95 "synt.y" /* yacc.c:1646  */
+    {t=t+1;sprintf(tmp,"%d",(yyvsp[0].chaine));sprintf(tmp3,"Q%d",jump);quadr((yyvsp[-1].chaine),tmp3,(yyvsp[-2].chaine),tmp);}
+#line 1427 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 97 "synt.y" /* yacc.c:1646  */
+#line 100 "synt.y" /* yacc.c:1646  */
     {    if(strcmp(ts[recherche((yyvsp[-3].chaine))].TypeEntite,type)!=0) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,(yyvsp[-3].chaine),ts[recherche((yyvsp[-3].chaine))].TypeEntite);}
-													else {quadr(":=",(yyvsp[-3].chaine),tmp2," ");x=0;} }
-#line 1433 "synt.tab.c" /* yacc.c:1646  */
+													else {jump=qc;quadr(":=",(yyvsp[-3].chaine),tmp2," ");x=0;} }
+#line 1434 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 100 "synt.y" /* yacc.c:1646  */
+#line 103 "synt.y" /* yacc.c:1646  */
     { if( (yyvsp[0].chaine)==0 && strcmp("/",(yyvsp[-1].chaine))==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);} else {
 															sprintf(tmp,"T%d",t);sprintf(tmp2,"T%d",t+1);quadr((yyvsp[-1].chaine),tmp,(yyvsp[0].chaine),tmp2);t=t+1;}}
-#line 1440 "synt.tab.c" /* yacc.c:1646  */
+#line 1441 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 102 "synt.y" /* yacc.c:1646  */
+#line 105 "synt.y" /* yacc.c:1646  */
     { 
            if((yyvsp[0].reel)==0 && strcmp("/",(yyvsp[-1].chaine))==0){printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);}
             else{sprintf(tmp,"%d",(yyvsp[0].reel));sprintf(tmp3,"T%d",t);sprintf(tmp2,"T%d",t+1);quadr((yyvsp[-1].chaine),tmp3,tmp,tmp2);t=t+1; }}
-#line 1448 "synt.tab.c" /* yacc.c:1646  */
+#line 1449 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 105 "synt.y" /* yacc.c:1646  */
+#line 108 "synt.y" /* yacc.c:1646  */
     { if ( (yyvsp[0].entier)==0 && strcmp("/",(yyvsp[-1].chaine))==0) {printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);}
 		   else { sprintf(tmp,"%d",(yyvsp[0].entier));sprintf(tmp3,"T%d",t);sprintf(tmp2,"T%d",t+1);quadr((yyvsp[-1].chaine),tmp3,tmp,tmp2);t=t+1;}}
-#line 1455 "synt.tab.c" /* yacc.c:1646  */
+#line 1456 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 107 "synt.y" /* yacc.c:1646  */
+#line 110 "synt.y" /* yacc.c:1646  */
     {strcpy(type,ts[recherche((yyvsp[0].chaine))].TypeEntite);sprintf(tmp2,"%d",(yyvsp[0].chaine));}
-#line 1461 "synt.tab.c" /* yacc.c:1646  */
+#line 1462 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 108 "synt.y" /* yacc.c:1646  */
+#line 111 "synt.y" /* yacc.c:1646  */
     {strcpy(type,"reel");sprintf(tmp2,"%d",(yyvsp[0].reel));}
-#line 1467 "synt.tab.c" /* yacc.c:1646  */
+#line 1468 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 109 "synt.y" /* yacc.c:1646  */
+#line 112 "synt.y" /* yacc.c:1646  */
     {strcpy(type,"entier");sprintf(tmp2,"%d",(yyvsp[0].entier));}
-#line 1473 "synt.tab.c" /* yacc.c:1646  */
+#line 1474 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 110 "synt.y" /* yacc.c:1646  */
+#line 113 "synt.y" /* yacc.c:1646  */
     {strcpy(type,"chaine");strcpy(tmp2,(yyvsp[0].chaine));}
-#line 1479 "synt.tab.c" /* yacc.c:1646  */
+#line 1480 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 114 "synt.y" /* yacc.c:1646  */
+#line 117 "synt.y" /* yacc.c:1646  */
     {strcpy(type,"entier");}
-#line 1485 "synt.tab.c" /* yacc.c:1646  */
+#line 1486 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 48:
-#line 115 "synt.y" /* yacc.c:1646  */
+#line 118 "synt.y" /* yacc.c:1646  */
     {strcpy(type,"reel");}
-#line 1491 "synt.tab.c" /* yacc.c:1646  */
+#line 1492 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 49:
-#line 116 "synt.y" /* yacc.c:1646  */
+#line 119 "synt.y" /* yacc.c:1646  */
     {strcpy(type,"chaine");}
-#line 1497 "synt.tab.c" /* yacc.c:1646  */
+#line 1498 "synt.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1501 "synt.tab.c" /* yacc.c:1646  */
+#line 1502 "synt.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1725,7 +1726,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 119 "synt.y" /* yacc.c:1906  */
+#line 122 "synt.y" /* yacc.c:1906  */
 
 int main()
 {

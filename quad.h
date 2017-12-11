@@ -12,7 +12,24 @@ extern int qc;
 
 void quadr(char opr[],char op1[],char op2[],char res[])
 {
-	strcpy(quad[qc].oper,opr);
+
+
+	if(strcmp(opr,"!=")==0)
+	{strcpy(quad[qc].oper,"BNE");}
+	if(strcmp(opr,"=")==0)
+	{strcpy(quad[qc].oper,"BE");}
+	if(strcmp(opr,"<")==0)
+	{strcpy(quad[qc].oper,"BL");}
+	if(strcmp(opr,">")==0)
+	{strcpy(quad[qc].oper,"BG");}	
+	if(strcmp(opr,"<=")==0)
+	{strcpy(quad[qc].oper,"BLE");}	
+	if(strcmp(opr,">=")==0)
+	{strcpy(quad[qc].oper,"BGE");}
+	else
+	{strcpy(quad[qc].oper,opr);}
+
+
 	strcpy(quad[qc].op1,op1);
 	strcpy(quad[qc].op2,op2);
 	strcpy(quad[qc].res,res);

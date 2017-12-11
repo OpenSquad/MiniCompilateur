@@ -9,7 +9,7 @@ int t=0; // Compteur des états temporaires
 int qc=0;
 char tmp[20],tmp2[20],tmp3[20],type[20];
 int x=0;
-
+int jump;
 %}
 
 %union {
@@ -79,23 +79,26 @@ inst_boucle: mc_Pour identificateur op_AFF identificateur mc_jusque identificate
 			;
 
 //------------------Instruction Condition-------------
-inst_cond:mc_Faire inst_aff mc_SI parenthese_gauche cond parenthese_droite 
+inst_cond:mc_Faire inst_aff mc_SI parenthese_gauche cond  parenthese_droite 
 ; 
 
+
+
 //------------------Condition-------------
-cond: identificateur op_comp const_entier {t=t+1;sprintf(tmp,"%d",$3);quadr($2,$1,tmp," ");}
-	 | identificateur op_comp const_reel {t=t+1;sprintf(tmp, "%d",$3 );quadr($2,$1,tmp," ");}     		     
-	 | const_entier op_comp const_entier	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);quadr($2,tmp,tmp2," ");}
-	 | const_entier op_comp const_reel	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);quadr($2,tmp,tmp2," ");}
-	 	 | const_reel op_comp const_entier	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);quadr($2,tmp,tmp2," ");}
-	 | const_reel op_comp const_reel	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);quadr($2,tmp,tmp2," ");}	
-	 | identificateur op_comp identificateur {t=t+1;sprintf(tmp,"%d",$3);quadr($2,$1,$3," ");}			     	 
+cond: identificateur op_comp const_entier {t=t+1;sprintf(tmp,"%d",$3);sprintf(tmp3,"Q%d",jump);
+quadr($2,tmp3,$1,tmp);}
+	 | identificateur op_comp const_reel {t=t+1;sprintf(tmp,"%d",$3 );sprintf(tmp3,"Q%d",jump);quadr($2,tmp3,$1,tmp);}     		     
+	 | const_entier op_comp const_entier	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);sprintf(tmp3,"Q%d",jump);quadr($2,tmp3,$1,tmp);}
+	 | const_entier op_comp const_reel	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);sprintf(tmp3,"Q%d",jump);quadr($2,tmp3,$1,tmp);}
+	 	 | const_reel op_comp const_entier	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);sprintf(tmp2,"%d",$3);sprintf(tmp3,"Q%d",jump);quadr($2,tmp3,tmp2,tmp);}
+	 | const_reel op_comp const_reel	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);sprintf(tmp3,"Q%d",jump);quadr($2,tmp3,tmp,tmp2);}	
+	 | identificateur op_comp identificateur {t=t+1;sprintf(tmp,"%d",$3);sprintf(tmp3,"Q%d",jump);quadr($2,tmp3,$1,tmp);}			     	 
 ; 
 
 
 //------------------Instruction Affectation-----------
 inst_aff: identificateur op_AFF exp_arith pvg {    if(strcmp(ts[recherche($1)].TypeEntite,type)!=0) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,$1,ts[recherche($1)].TypeEntite);}
-													else {quadr(":=",$1,tmp2," ");x=0;} }
+													else {jump=qc;quadr(":=",$1,tmp2," ");x=0;} }
 ; 
 exp_arith: exp_arith op_arith identificateur  { if( $3==0 && strcmp("/",$2)==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);} else {
 															sprintf(tmp,"T%d",t);sprintf(tmp2,"T%d",t+1);quadr($2,tmp,$3,tmp2);t=t+1;}}
