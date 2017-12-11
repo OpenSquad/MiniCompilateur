@@ -72,11 +72,12 @@ extern nb_ligne;
 extern nb_colonne;
 int t=0; // Compteur des états temporaires
 int qc=0;
-char tmp[20],tmp2[20],tmp3[20],type[20];
+char tmp[20],tmp2[20],tmp3[20],type[20],tmp4[20];
 int x=0;
 int jump;
 
-#line 80 "synt.tab.c" /* yacc.c:339  */
+
+#line 81 "synt.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -145,13 +146,13 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 15 "synt.y" /* yacc.c:355  */
+#line 16 "synt.y" /* yacc.c:355  */
 
 int entier;
 float reel;
 char* chaine;
 
-#line 155 "synt.tab.c" /* yacc.c:355  */
+#line 156 "synt.tab.c" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -168,7 +169,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 172 "synt.tab.c" /* yacc.c:358  */
+#line 173 "synt.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -468,11 +469,11 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    25,    25,    31,    35,    36,    37,    38,    39,    40,
-      44,    45,    46,    49,    50,    51,    54,    55,    56,    60,
-      61,    65,    66,    67,    68,    69,    70,    75,    76,    77,
-      78,    82,    88,    90,    91,    92,    93,    94,    95,   100,
-     103,   105,   108,   110,   111,   112,   113,   117,   118,   119
+       0,    26,    26,    32,    36,    37,    38,    39,    40,    41,
+      45,    46,    47,    50,    51,    52,    55,    56,    57,    61,
+      62,    66,    67,    68,    69,    70,    71,    76,    77,    78,
+      79,    83,    89,    91,    92,    93,    94,    95,    96,   101,
+     104,   106,   109,   111,   112,   113,   114,   118,   119,   120
 };
 #endif
 
@@ -1312,193 +1313,193 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 25 "synt.y" /* yacc.c:1646  */
+#line 26 "synt.y" /* yacc.c:1646  */
     {printf("----------programme syntaxiquement juste------\n ecrire quelque chose puis appuyer sur entre pour afficher la table des symboles et des quadruplets");}
-#line 1318 "synt.tab.c" /* yacc.c:1646  */
+#line 1319 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 44 "synt.y" /* yacc.c:1646  */
+#line 45 "synt.y" /* yacc.c:1646  */
     {inserer((yyvsp[-6].chaine),"entier",(yyvsp[-4].entier));}
-#line 1324 "synt.tab.c" /* yacc.c:1646  */
+#line 1325 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 45 "synt.y" /* yacc.c:1646  */
+#line 46 "synt.y" /* yacc.c:1646  */
     {inserer((yyvsp[-6].chaine),"reel",(yyvsp[-4].entier));}
-#line 1330 "synt.tab.c" /* yacc.c:1646  */
+#line 1331 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 46 "synt.y" /* yacc.c:1646  */
+#line 47 "synt.y" /* yacc.c:1646  */
     {inserer((yyvsp[-6].chaine),"chaine",(yyvsp[-4].entier));}
-#line 1336 "synt.tab.c" /* yacc.c:1646  */
+#line 1337 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 49 "synt.y" /* yacc.c:1646  */
+#line 50 "synt.y" /* yacc.c:1646  */
     {inserer((yyvsp[0].chaine),"entier",1);}
-#line 1342 "synt.tab.c" /* yacc.c:1646  */
+#line 1343 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 50 "synt.y" /* yacc.c:1646  */
+#line 51 "synt.y" /* yacc.c:1646  */
     {inserer((yyvsp[0].chaine),"reel",1);}
-#line 1348 "synt.tab.c" /* yacc.c:1646  */
+#line 1349 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 15:
-#line 51 "synt.y" /* yacc.c:1646  */
+#line 52 "synt.y" /* yacc.c:1646  */
     {inserer((yyvsp[0].chaine),"chaine",1);}
-#line 1354 "synt.tab.c" /* yacc.c:1646  */
+#line 1355 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 54 "synt.y" /* yacc.c:1646  */
+#line 55 "synt.y" /* yacc.c:1646  */
     {inserer((yyvsp[-3].chaine),"entier",1);}
-#line 1360 "synt.tab.c" /* yacc.c:1646  */
+#line 1361 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 55 "synt.y" /* yacc.c:1646  */
+#line 56 "synt.y" /* yacc.c:1646  */
     {inserer((yyvsp[-3].chaine),"reel",1);}
-#line 1366 "synt.tab.c" /* yacc.c:1646  */
+#line 1367 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 56 "synt.y" /* yacc.c:1646  */
+#line 57 "synt.y" /* yacc.c:1646  */
     {inserer((yyvsp[-3].chaine),"chaine",1);}
-#line 1372 "synt.tab.c" /* yacc.c:1646  */
+#line 1373 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 60 "synt.y" /* yacc.c:1646  */
+#line 61 "synt.y" /* yacc.c:1646  */
     {if(recherche((yyvsp[-2].chaine))!=-1) printf("-----------ERREUR:semantique - la variable: %s deja declare ligne %d  \n ",(yyvsp[-2].chaine),nb_ligne,"------------");}
-#line 1378 "synt.tab.c" /* yacc.c:1646  */
+#line 1379 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 61 "synt.y" /* yacc.c:1646  */
+#line 62 "synt.y" /* yacc.c:1646  */
     {if(recherche((yyvsp[0].chaine))!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare ligne %d  \n ",(yyvsp[0].chaine),nb_ligne,"------------");}
-#line 1384 "synt.tab.c" /* yacc.c:1646  */
+#line 1385 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 88 "synt.y" /* yacc.c:1646  */
+#line 89 "synt.y" /* yacc.c:1646  */
     {t=t+1;sprintf(tmp,"%d",(yyvsp[0].entier));sprintf(tmp3,"Q%d",jump);
 quadr((yyvsp[-1].chaine),tmp3,(yyvsp[-2].chaine),tmp);}
-#line 1391 "synt.tab.c" /* yacc.c:1646  */
+#line 1392 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 90 "synt.y" /* yacc.c:1646  */
+#line 91 "synt.y" /* yacc.c:1646  */
     {t=t+1;sprintf(tmp,"%d",(yyvsp[0].reel) );sprintf(tmp3,"Q%d",jump);quadr((yyvsp[-1].chaine),tmp3,(yyvsp[-2].chaine),tmp);}
-#line 1397 "synt.tab.c" /* yacc.c:1646  */
+#line 1398 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 91 "synt.y" /* yacc.c:1646  */
-    {t=t+1;sprintf(tmp,"%d",(yyvsp[-2].entier));sprintf(tmp2,"%d",(yyvsp[0].entier));sprintf(tmp3,"Q%d",jump);quadr((yyvsp[-1].chaine),tmp3,(yyvsp[-2].entier),tmp);}
-#line 1403 "synt.tab.c" /* yacc.c:1646  */
+#line 92 "synt.y" /* yacc.c:1646  */
+    {t=t+1;sprintf(tmp,"%d",(yyvsp[-2].entier));sprintf(tmp2,"%d",(yyvsp[0].entier));sprintf(tmp3,"Q%d",jump);quadr((yyvsp[-1].chaine),tmp3,tmp2,tmp);}
+#line 1404 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 92 "synt.y" /* yacc.c:1646  */
-    {t=t+1;sprintf(tmp,"%d",(yyvsp[-2].entier));sprintf(tmp2,"%d",(yyvsp[0].reel));sprintf(tmp3,"Q%d",jump);quadr((yyvsp[-1].chaine),tmp3,(yyvsp[-2].entier),tmp);}
-#line 1409 "synt.tab.c" /* yacc.c:1646  */
+#line 93 "synt.y" /* yacc.c:1646  */
+    {t=t+1;sprintf(tmp,"%d",(yyvsp[-2].entier));sprintf(tmp2,"%d",(yyvsp[0].reel));sprintf(tmp4,"%d",t+1);sprintf(tmp3,"Q%d",jump);quadr((yyvsp[-1].chaine),tmp3,tmp,tmp4);}
+#line 1410 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 93 "synt.y" /* yacc.c:1646  */
+#line 94 "synt.y" /* yacc.c:1646  */
     {t=t+1;sprintf(tmp,"%d",(yyvsp[-2].reel));sprintf(tmp2,"%d",(yyvsp[0].entier));sprintf(tmp2,"%d",(yyvsp[0].entier));sprintf(tmp3,"Q%d",jump);quadr((yyvsp[-1].chaine),tmp3,tmp2,tmp);}
-#line 1415 "synt.tab.c" /* yacc.c:1646  */
+#line 1416 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 94 "synt.y" /* yacc.c:1646  */
+#line 95 "synt.y" /* yacc.c:1646  */
     {t=t+1;sprintf(tmp,"%d",(yyvsp[-2].reel));sprintf(tmp2,"%d",(yyvsp[0].reel));sprintf(tmp3,"Q%d",jump);quadr((yyvsp[-1].chaine),tmp3,tmp,tmp2);}
-#line 1421 "synt.tab.c" /* yacc.c:1646  */
+#line 1422 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 95 "synt.y" /* yacc.c:1646  */
+#line 96 "synt.y" /* yacc.c:1646  */
     {t=t+1;sprintf(tmp,"%d",(yyvsp[0].chaine));sprintf(tmp3,"Q%d",jump);quadr((yyvsp[-1].chaine),tmp3,(yyvsp[-2].chaine),tmp);}
-#line 1427 "synt.tab.c" /* yacc.c:1646  */
+#line 1428 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 100 "synt.y" /* yacc.c:1646  */
+#line 101 "synt.y" /* yacc.c:1646  */
     {    if(strcmp(ts[recherche((yyvsp[-3].chaine))].TypeEntite,type)!=0) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,(yyvsp[-3].chaine),ts[recherche((yyvsp[-3].chaine))].TypeEntite);}
 													else {jump=qc;quadr(":=",(yyvsp[-3].chaine),tmp2," ");x=0;} }
-#line 1434 "synt.tab.c" /* yacc.c:1646  */
+#line 1435 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 103 "synt.y" /* yacc.c:1646  */
+#line 104 "synt.y" /* yacc.c:1646  */
     { if( (yyvsp[0].chaine)==0 && strcmp("/",(yyvsp[-1].chaine))==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);} else {
 															sprintf(tmp,"T%d",t);sprintf(tmp2,"T%d",t+1);quadr((yyvsp[-1].chaine),tmp,(yyvsp[0].chaine),tmp2);t=t+1;}}
-#line 1441 "synt.tab.c" /* yacc.c:1646  */
+#line 1442 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 105 "synt.y" /* yacc.c:1646  */
+#line 106 "synt.y" /* yacc.c:1646  */
     { 
            if((yyvsp[0].reel)==0 && strcmp("/",(yyvsp[-1].chaine))==0){printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);}
             else{sprintf(tmp,"%d",(yyvsp[0].reel));sprintf(tmp3,"T%d",t);sprintf(tmp2,"T%d",t+1);quadr((yyvsp[-1].chaine),tmp3,tmp,tmp2);t=t+1; }}
-#line 1449 "synt.tab.c" /* yacc.c:1646  */
+#line 1450 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 108 "synt.y" /* yacc.c:1646  */
+#line 109 "synt.y" /* yacc.c:1646  */
     { if ( (yyvsp[0].entier)==0 && strcmp("/",(yyvsp[-1].chaine))==0) {printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);}
 		   else { sprintf(tmp,"%d",(yyvsp[0].entier));sprintf(tmp3,"T%d",t);sprintf(tmp2,"T%d",t+1);quadr((yyvsp[-1].chaine),tmp3,tmp,tmp2);t=t+1;}}
-#line 1456 "synt.tab.c" /* yacc.c:1646  */
+#line 1457 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 110 "synt.y" /* yacc.c:1646  */
+#line 111 "synt.y" /* yacc.c:1646  */
     {strcpy(type,ts[recherche((yyvsp[0].chaine))].TypeEntite);sprintf(tmp2,"%d",(yyvsp[0].chaine));}
-#line 1462 "synt.tab.c" /* yacc.c:1646  */
+#line 1463 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 111 "synt.y" /* yacc.c:1646  */
+#line 112 "synt.y" /* yacc.c:1646  */
     {strcpy(type,"reel");sprintf(tmp2,"%d",(yyvsp[0].reel));}
-#line 1468 "synt.tab.c" /* yacc.c:1646  */
+#line 1469 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 112 "synt.y" /* yacc.c:1646  */
+#line 113 "synt.y" /* yacc.c:1646  */
     {strcpy(type,"entier");sprintf(tmp2,"%d",(yyvsp[0].entier));}
-#line 1474 "synt.tab.c" /* yacc.c:1646  */
+#line 1475 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 113 "synt.y" /* yacc.c:1646  */
+#line 114 "synt.y" /* yacc.c:1646  */
     {strcpy(type,"chaine");strcpy(tmp2,(yyvsp[0].chaine));}
-#line 1480 "synt.tab.c" /* yacc.c:1646  */
+#line 1481 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 117 "synt.y" /* yacc.c:1646  */
+#line 118 "synt.y" /* yacc.c:1646  */
     {strcpy(type,"entier");}
-#line 1486 "synt.tab.c" /* yacc.c:1646  */
+#line 1487 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 48:
-#line 118 "synt.y" /* yacc.c:1646  */
+#line 119 "synt.y" /* yacc.c:1646  */
     {strcpy(type,"reel");}
-#line 1492 "synt.tab.c" /* yacc.c:1646  */
+#line 1493 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 49:
-#line 119 "synt.y" /* yacc.c:1646  */
+#line 120 "synt.y" /* yacc.c:1646  */
     {strcpy(type,"chaine");}
-#line 1498 "synt.tab.c" /* yacc.c:1646  */
+#line 1499 "synt.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1502 "synt.tab.c" /* yacc.c:1646  */
+#line 1503 "synt.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1726,7 +1727,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 122 "synt.y" /* yacc.c:1906  */
+#line 123 "synt.y" /* yacc.c:1906  */
 
 int main()
 {

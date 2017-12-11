@@ -7,9 +7,10 @@ extern nb_ligne;
 extern nb_colonne;
 int t=0; // Compteur des états temporaires
 int qc=0;
-char tmp[20],tmp2[20],tmp3[20],type[20];
+char tmp[20],tmp2[20],tmp3[20],type[20],tmp4[20];
 int x=0;
 int jump;
+
 %}
 
 %union {
@@ -88,8 +89,8 @@ inst_cond:mc_Faire inst_aff mc_SI parenthese_gauche cond  parenthese_droite
 cond: identificateur op_comp const_entier {t=t+1;sprintf(tmp,"%d",$3);sprintf(tmp3,"Q%d",jump);
 quadr($2,tmp3,$1,tmp);}
 	 | identificateur op_comp const_reel {t=t+1;sprintf(tmp,"%d",$3 );sprintf(tmp3,"Q%d",jump);quadr($2,tmp3,$1,tmp);}     		     
-	 | const_entier op_comp const_entier	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);sprintf(tmp3,"Q%d",jump);quadr($2,tmp3,$1,tmp);}
-	 | const_entier op_comp const_reel	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);sprintf(tmp3,"Q%d",jump);quadr($2,tmp3,$1,tmp);}
+	 | const_entier op_comp const_entier	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);sprintf(tmp3,"Q%d",jump);quadr($2,tmp3,tmp2,tmp);}
+	 | const_entier op_comp const_reel	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);sprintf(tmp4,"%d",t+1);sprintf(tmp3,"Q%d",jump);quadr($2,tmp3,tmp,tmp4);}
 	 	 | const_reel op_comp const_entier	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);sprintf(tmp2,"%d",$3);sprintf(tmp3,"Q%d",jump);quadr($2,tmp3,tmp2,tmp);}
 	 | const_reel op_comp const_reel	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);sprintf(tmp3,"Q%d",jump);quadr($2,tmp3,tmp,tmp2);}	
 	 | identificateur op_comp identificateur {t=t+1;sprintf(tmp,"%d",$3);sprintf(tmp3,"Q%d",jump);quadr($2,tmp3,$1,tmp);}			     	 
