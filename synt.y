@@ -99,10 +99,13 @@ quadr($2,tmp3,$1,tmp);}
 //------------------Instruction Affectation-----------
 // on peut affecter un entier  à un reel, c'est pour ça qu'on a rajouté des conditions dans la ligne juste en dessous
 
-inst_aff: identificateur op_AFF exp_arith pvg {if(strcmp(ts[recherche($1)].TypeEntite,type)!=0 && !(strcmp(ts[recherche($1)].TypeEntite,"reel")==0 && strcmp(type,"entier")==0)) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,$1,ts[recherche($1)].TypeEntite);}
+inst_aff: identificateur op_AFF exp_arith pvg {if(recherche($1)==-1){printf("Variable %s non déclarée.\n",$1);} else if(strcmp(ts[recherche($1)].TypeEntite,type)!=0 && !(strcmp(ts[recherche($1)].TypeEntite,"reel")==0 && strcmp(type,"entier")==0)) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,$1,ts[recherche($1)].TypeEntite);}
 			else {jump=qc;quadr(":=",tmp2,"  ",$1);} }
-		|identificateur op_AFF const_chaine pvg {if(strcmp(ts[recherche($1)].TypeEntite,"chaine")!=0) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,$1,ts[recherche($1)].TypeEntite);}
+		|identificateur op_AFF const_chaine pvg {if(recherche($1)==-1){printf("Variable %s non déclarée.\n",$1);} else if(strcmp(ts[recherche($1)].TypeEntite,"chaine")!=0) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,$1,ts[recherche($1)].TypeEntite);}
 			else {strcpy(type,"chaine");strcpy(tmp2,$3);jump=qc;quadr(":=",tmp2," ",$1);}}
+			| identificateur crochet_gauche const_entier crochet_droit op_AFF exp_arith pvg {if(recherche($1)==-1){printf("Variable %s non déclarée.\n",$1);} else if(strcmp(ts[recherche($1)].TypeEntite,type)!=0 && !(strcmp(ts[recherche($1)].TypeEntite,"reel")==0 && strcmp(type,"entier")==0)) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,$1,ts[recherche($1)].TypeEntite);}
+			else if($3>ts[recherche($1)].TailleEntite-1){printf("Dépassement de la taille du tableau %s qui est de :  %d",$1,ts[recherche($1)].TailleEntite);} 
+			else {jump=qc;quadr(":=",tmp2,"  ",$1);} }
 ; 
 exp_arith: exp_arith op_arith identificateur  { if( $3==0 && strcmp("/",$2)==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);} 
 			else {sprintf(tmp,"T%d",t);sprintf(tmp2,"T%d",t+1);quadr($2,tmp,$3,tmp2);sprintf(tmp2,"T%d",t+1);t=t+1;}}
@@ -130,6 +133,6 @@ printf("\n\n");
 afficher();
 printf("\n\n");
 afccer_qdr();
-system("PAUSE");
+
 
 }
