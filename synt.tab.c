@@ -1438,7 +1438,7 @@ quadr((yyvsp[-1].chaine),tmp3,(yyvsp[-2].chaine),tmp);}
 
   case 40:
 #line 103 "synt.y" /* yacc.c:1646  */
-    {if(strcmp(ts[recherche((yyvsp[-3].chaine))].TypeEntite,type)!=0) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,(yyvsp[-3].chaine),ts[recherche((yyvsp[-3].chaine))].TypeEntite);}
+    {if(strcmp(ts[recherche((yyvsp[-3].chaine))].TypeEntite,"chaine")!=0) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,(yyvsp[-3].chaine),ts[recherche((yyvsp[-3].chaine))].TypeEntite);}
 													else {strcpy(type,"chaine");strcpy(tmp2,(yyvsp[-1].chaine));jump=qc;quadr(":=",tmp2," ",(yyvsp[-3].chaine));x=0;}}
 #line 1444 "synt.tab.c" /* yacc.c:1646  */
     break;
