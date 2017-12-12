@@ -79,7 +79,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 16 "synt.y" /* yacc.c:1909  */
+#line 15 "synt.y" /* yacc.c:1909  */
 
 int entier;
 float reel;
