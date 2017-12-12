@@ -99,18 +99,18 @@ quadr($2,tmp3,$1,tmp);}
 
 //------------------Instruction Affectation-----------
 inst_aff: identificateur op_AFF exp_arith pvg {    if(strcmp(ts[recherche($1)].TypeEntite,type)!=0) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,$1,ts[recherche($1)].TypeEntite);}
-													else {jump=qc;quadr(":=",$1,"  ",tmp2);x=0;} }
+													else {jump=qc;quadr(":=",tmp2,"  ",$1);x=0;} }
 													|  identificateur op_AFF const_chaine pvg {if(strcmp(ts[recherche($1)].TypeEntite,type)!=0) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,$1,ts[recherche($1)].TypeEntite);}
-													else {strcpy(type,"chaine");strcpy(tmp2,$3);jump=qc;quadr(":=",$1," ",tmp2);x=0;}}
+													else {strcpy(type,"chaine");strcpy(tmp2,$3);jump=qc;quadr(":=",tmp2," ",$1);x=0;}}
 ; 
 exp_arith: exp_arith op_arith identificateur  { if( $3==0 && strcmp("/",$2)==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);} else {
-															sprintf(tmp,"T%d",t);sprintf(tmp2,"T%d",t+1);quadr($2,tmp,$3,tmp2);t=t+1;}}
+															sprintf(tmp,"T%d",t);sprintf(tmp2,"T%d",t+1);quadr($2,tmp,$3,tmp2);sprintf(tmp2,"T%d",t+1);t=t+1;}}
            |exp_arith op_arith const_reel  { 
            if($3==0 && strcmp("/",$2)==0){printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);}
-            else{sprintf(tmp,"%d",$3);sprintf(tmp3,"T%d",t);sprintf(tmp2,"T%d",t+1);quadr($2,tmp3,tmp,tmp2);t=t+1; }}
+            else{sprintf(tmp,"%d",$3);sprintf(tmp3,"T%d",t);sprintf(tmp4,"T%d",t+1);quadr($2,tmp2,tmp,tmp4);sprintf(tmp2,"T%d",t+1);t=t+1; }}
 		   |exp_arith op_arith const_entier  { if ( $3==0 && strcmp("/",$2)==0) {printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);}
-		   else { sprintf(tmp,"%d",$3);sprintf(tmp3,"T%d",t);sprintf(tmp2,"T%d",t+1);quadr($2,tmp3,tmp,tmp2);t=t+1;}}
-		   |identificateur {strcpy(type,ts[recherche($1)].TypeEntite);sprintf(tmp2,"%d",$1);}
+		   else { sprintf(tmp,"%d",$3);sprintf(tmp3,"T%d",t);sprintf(tmp4,"T%d",t+1);quadr($2,tmp2,tmp,tmp4);sprintf(tmp2,"T%d",t+1);t=t+1;}}
+		   |identificateur {strcpy(type,ts[recherche($1)].TypeEntite);strcpy(tmp2,$1);}
 		   |const_reel {strcpy(type,"reel");sprintf(tmp2,"%d",$1);}
 		   |const_entier {strcpy(type,"entier");sprintf(tmp2,"%d",$1);}
 ;

@@ -1432,21 +1432,21 @@ quadr((yyvsp[-1].chaine),tmp3,(yyvsp[-2].chaine),tmp);}
   case 39:
 #line 101 "synt.y" /* yacc.c:1646  */
     {    if(strcmp(ts[recherche((yyvsp[-3].chaine))].TypeEntite,type)!=0) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,(yyvsp[-3].chaine),ts[recherche((yyvsp[-3].chaine))].TypeEntite);}
-													else {jump=qc;quadr(":=",(yyvsp[-3].chaine),"  ",tmp2);x=0;} }
+													else {jump=qc;quadr(":=",tmp2,"  ",(yyvsp[-3].chaine));x=0;} }
 #line 1437 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
 #line 103 "synt.y" /* yacc.c:1646  */
     {if(strcmp(ts[recherche((yyvsp[-3].chaine))].TypeEntite,type)!=0) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,(yyvsp[-3].chaine),ts[recherche((yyvsp[-3].chaine))].TypeEntite);}
-													else {strcpy(type,"chaine");strcpy(tmp2,(yyvsp[-1].chaine));jump=qc;quadr(":=",(yyvsp[-3].chaine)," ",tmp2);x=0;}}
+													else {strcpy(type,"chaine");strcpy(tmp2,(yyvsp[-1].chaine));jump=qc;quadr(":=",tmp2," ",(yyvsp[-3].chaine));x=0;}}
 #line 1444 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
 #line 106 "synt.y" /* yacc.c:1646  */
     { if( (yyvsp[0].chaine)==0 && strcmp("/",(yyvsp[-1].chaine))==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);} else {
-															sprintf(tmp,"T%d",t);sprintf(tmp2,"T%d",t+1);quadr((yyvsp[-1].chaine),tmp,(yyvsp[0].chaine),tmp2);t=t+1;}}
+															sprintf(tmp,"T%d",t);sprintf(tmp2,"T%d",t+1);quadr((yyvsp[-1].chaine),tmp,(yyvsp[0].chaine),tmp2);sprintf(tmp2,"T%d",t+1);t=t+1;}}
 #line 1451 "synt.tab.c" /* yacc.c:1646  */
     break;
 
@@ -1454,20 +1454,20 @@ quadr((yyvsp[-1].chaine),tmp3,(yyvsp[-2].chaine),tmp);}
 #line 108 "synt.y" /* yacc.c:1646  */
     { 
            if((yyvsp[0].reel)==0 && strcmp("/",(yyvsp[-1].chaine))==0){printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);}
-            else{sprintf(tmp,"%d",(yyvsp[0].reel));sprintf(tmp3,"T%d",t);sprintf(tmp2,"T%d",t+1);quadr((yyvsp[-1].chaine),tmp3,tmp,tmp2);t=t+1; }}
+            else{sprintf(tmp,"%d",(yyvsp[0].reel));sprintf(tmp3,"T%d",t);sprintf(tmp4,"T%d",t+1);quadr((yyvsp[-1].chaine),tmp2,tmp,tmp4);sprintf(tmp2,"T%d",t+1);t=t+1; }}
 #line 1459 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 43:
 #line 111 "synt.y" /* yacc.c:1646  */
     { if ( (yyvsp[0].entier)==0 && strcmp("/",(yyvsp[-1].chaine))==0) {printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);}
-		   else { sprintf(tmp,"%d",(yyvsp[0].entier));sprintf(tmp3,"T%d",t);sprintf(tmp2,"T%d",t+1);quadr((yyvsp[-1].chaine),tmp3,tmp,tmp2);t=t+1;}}
+		   else { sprintf(tmp,"%d",(yyvsp[0].entier));sprintf(tmp3,"T%d",t);sprintf(tmp4,"T%d",t+1);quadr((yyvsp[-1].chaine),tmp2,tmp,tmp4);sprintf(tmp2,"T%d",t+1);t=t+1;}}
 #line 1466 "synt.tab.c" /* yacc.c:1646  */
     break;
 
   case 44:
 #line 113 "synt.y" /* yacc.c:1646  */
-    {strcpy(type,ts[recherche((yyvsp[0].chaine))].TypeEntite);sprintf(tmp2,"%d",(yyvsp[0].chaine));}
+    {strcpy(type,ts[recherche((yyvsp[0].chaine))].TypeEntite);strcpy(tmp2,(yyvsp[0].chaine));}
 #line 1472 "synt.tab.c" /* yacc.c:1646  */
     break;
 
