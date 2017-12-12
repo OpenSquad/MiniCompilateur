@@ -1,35 +1,83 @@
--initialisation des variables partie declaration? 
+EXEMPLES :
 
-/*dzadzada*/
-//dadazdzadza
+- Structure programme simple
 ALGORITHME algo
 VAR entier a;
-reel a|b;
-a[5]:entier;a:entier; b:reel;
-//dazdazdazdzada
-DEBUT 
-/*dzadzadzada*/
-Faire a<--5; SI (a=5)
-a<--val;
-Pour a<--5 jusque 5 Faire a<--5;Faire a<--5; SI (a=5)
-a<--val;
-a<--val; Fait
+reel b;
+chaine c;
+DEBUT
 FIN
-/*dazdzada*/
-//adzda
+
+
+- Affectation de variable et remplissage des tableaux.
+ALGORITHME algo
+VAR entier a;
+reel b;
+chaine c;
+DEBUT
+ a<--5;
+FIN
 
 
 
+- Affectation mauvais type.
+ALGORITHME algo
+VAR entier a;
+reel b;
+chaine c;
+DEBUT
+ a<--5;
+ a<--5.5;
+ c<--2;
+FIN
+
+- Affectation ENTIER à un REEL.
+ALGORITHME algo
+VAR entier a;
+reel b;
+chaine c;
+DEBUT
+ b<--5;
+FIN
+
+- Affectation CHAINE.
+ALGORITHME algo
+VAR entier a;
+reel b;
+chaine c;
+DEBUT
+ c<--"bonjour";
+FIN
+
+- Quadruplés de calculs complexe : a+b+c;
+ALGORITHME algo
+VAR entier a;
+reel b;
+chaine c;
+DEBUT
+ a<--a+b+5;
+FIN
 
 
 
+- Jump de Faire SI
+ALGORITHME algo
+VAR entier a;
+reel b;
+chaine c;
+DEBUT
+Faire a<--5; SI (b<2)
+FIN
 
 
 
-partieInstruction: inst_aff partieInstruction    {printf("correct");}
-					| inst_boucle partieInstruction
-					| inst_cond  partieInstruction
-					| inst_aff
-					|inst_boucle
-					|inst_cond
-;					
+- Dépassement taille tableau.
+ALGORITHME algo
+VAR a[3]:entier;
+reel b;
+chaine c;
+DEBUT
+ a[2]<--5;
+ a[3]<--2;
+FIN
+
