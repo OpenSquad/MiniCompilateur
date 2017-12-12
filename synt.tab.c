@@ -1453,7 +1453,7 @@ quadr((yyvsp[-1].chaine),tmp3,(yyvsp[-2].chaine),tmp);}
 #line 107 "synt.y" /* yacc.c:1646  */
     { 
            if((yyvsp[0].reel)==0 && strcmp("/",(yyvsp[-1].chaine))==0){printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);}
-            else{sprintf(tmp,"%f",(yyvsp[0].reel));sprintf(tmp3,"T%d",t);sprintf(tmp4,"T%d",t+1);quadr((yyvsp[-1].chaine),tmp2,tmp,tmp4);sprintf(tmp2,"T%d",t+1);t=t+1; }}
+            else{sprintf(tmp,"%.2f",(yyvsp[0].reel));sprintf(tmp3,"T%d",t);sprintf(tmp4,"T%d",t+1);quadr((yyvsp[-1].chaine),tmp2,tmp,tmp4);sprintf(tmp2,"T%d",t+1);t=t+1; }}
 #line 1458 "synt.tab.c" /* yacc.c:1646  */
     break;
 
@@ -1472,7 +1472,7 @@ quadr((yyvsp[-1].chaine),tmp3,(yyvsp[-2].chaine),tmp);}
 
   case 45:
 #line 113 "synt.y" /* yacc.c:1646  */
-    {strcpy(type,"reel");sprintf(tmp2,"%f",(yyvsp[0].reel));}
+    {strcpy(type,"reel");sprintf(tmp2,"%.2f",(yyvsp[0].reel));}
 #line 1477 "synt.tab.c" /* yacc.c:1646  */
     break;
 
