@@ -1,83 +1,69 @@
-EXEMPLES :
-
-- Structure programme simple
+-affecter un entier à un reel ? on le transform en un reel ?
+reel c ;
+-je fais : c<--5; ça sauvegarde : c<--5.0;
+---------------------
+-peut on mettre sauv_inst dans la routine B?
+------------------------------
+entier = reel + entier
+------------------------------
+if , instruction ou expression?
+----------------------
 ALGORITHME algo
-VAR entier a;
-reel b;
-chaine c;
+VAR entier a;entier c;chaine d;
+reel a|b;
+a[5]:entier;a:entier; b:reel;
+//dazdazdazdzada
 DEBUT
+/*dzadzadzada*/
+a<--5;
+d<--"hey";
+a<--5+7/8;
+a[0]<--6;
+a[3]<--6;
+b<--b+b;
+b<--5+b;
 FIN
 
 
-- Affectation de variable et remplissage des tableaux.
+sprintf(tmp4,"%d",sauv_inst); quadr("BNZ",tmp4,"condition test"," ");t++;sprintf(tmp4,"%s",t);ajour_quad(sauv_fin,2,tmp4);
+
+quadr("BR"," "," "," ");sauv_fin=t;t++;sprintf(tmp4,"%s",t);ajour_quad(sauv_cond,2,tmp4);
+
+quadr("BR"," "," "," ");sauv_cond=t;t++;sauv_inst=t;
+
+/*dzadzada*/
+//dadazdzadza
 ALGORITHME algo
-VAR entier a;
-reel b;
-chaine c;
-DEBUT
- a<--5;
+VAR entier a;entier c;chaine d;
+reel a|b;
+f[5]:entier;a:entier; b:reel;
+//dazdazdazdzada
+DEBUT 
+/*dzadzadzada*/
+Faire a<--2; SI (a=5)
+a<--3+5+7;
+Pour a<--5 jusque 5 Faire a<--9;Faire a<--7; SI (a=5)
+a<--5;
+h<--7; Fait
 FIN
+/*dazdzada*/
+//adzda
+
+-----------------TEST-------------
+afficher la ligne et collone (division /0)
 
 
 
-- Affectation mauvais type.
-ALGORITHME algo
-VAR entier a;
-reel b;
-chaine c;
-DEBUT
- a<--5;
- a<--5.5;
- c<--2;
-FIN
-
-- Affectation ENTIER Ã  un REEL.
-ALGORITHME algo
-VAR entier a;
-reel b;
-chaine c;
-DEBUT
- b<--5;
-FIN
-
-- Affectation CHAINE.
-ALGORITHME algo
-VAR entier a;
-reel b;
-chaine c;
-DEBUT
- c<--"bonjour";
-FIN
-
-- QuadruplÃ©s de calculs complexe : a+b+c;
-ALGORITHME algo
-VAR entier a;
-reel b;
-chaine c;
-DEBUT
- a<--a+b+5;
-FIN
 
 
 
-- Jump de Faire SI
-ALGORITHME algo
-VAR entier a;
-reel b;
-chaine c;
-DEBUT
-Faire a<--5; SI (b<2)
-FIN
 
 
 
-- DÃ©passement taille tableau.
-ALGORITHME algo
-VAR a[3]:entier;
-reel b;
-chaine c;
-DEBUT
- a[2]<--5;
- a[3]<--2;
-FIN
-
+partieInstruction: inst_aff partieInstruction    {printf("correct");}
+					| inst_boucle partieInstruction
+					| inst_cond  partieInstruction
+					| inst_aff
+					|inst_boucle
+					|inst_cond
+;					

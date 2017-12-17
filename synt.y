@@ -8,7 +8,9 @@ extern nb_colonne;
 int t=0; // Compteur des états temporaires
 int qc=0;
 char tmp[20],tmp2[20],tmp3[20],type[20],tmp4[20];
+int x=0;
 int jump;
+int sauv_cond=0,sauv_inst=0;
 
 %}
 
@@ -17,7 +19,7 @@ int entier;
 float reel;
 char* chaine;}
 
-%token  mc_ALGORITHME <chaine>mc_entier <chaine>mc_reel <chaine>mc_chaine mc_VAR mc_DEBUT mc_FIN mc_Pour mc_jusque mc_Faire mc_Fait mc_SI op_AFF <chaine>op_comp <chaine>op_arith bar parenthese_gauche parenthese_droite <chaine>identificateur <entier>const_entier <reel>const_reel <chaine>const_chaine dp pvg crochet_gauche crochet_droit 
+%token  mc_ALGORITHME <chaine>mc_entier <chaine>mc_reel <chaine>mc_chaine mc_VAR mc_DEBUT mc_FIN mc_Pour mc_jusque mc_Faire mc_Fait mc_SI op_AFF <chaine>op_comp <chaine>op_arith bar parenthese_gauche parenthese_droite <chaine>identificateur <entier>const_entier <reel>const_reel <chaine>const_chaine dp pvg crochet_gauche crochet_droit  
 
 
 %%
@@ -79,43 +81,47 @@ inst_boucle: mc_Pour identificateur op_AFF identificateur mc_jusque identificate
 			;
 
 //------------------Instruction Condition-------------
-inst_cond:mc_Faire inst_aff mc_SI parenthese_gauche cond  parenthese_droite 
-; 
+
+inst_cond:B mc_SI parenthese_gauche cond  parenthese_droite
+;
+B :A inst_aff
+;
+A:mc_Faire {}
+;
 
 
 
 //------------------Condition-------------
-cond: identificateur op_comp const_entier {t=t+1;sprintf(tmp,"%d",$3);sprintf(tmp3,"Q%d",jump);
-quadr($2,tmp3,$1,tmp);}
-	 | identificateur op_comp const_reel {t=t+1;sprintf(tmp,"%d",$3 );sprintf(tmp3,"Q%d",jump);quadr($2,tmp3,$1,tmp);}     		     
-	 | const_entier op_comp const_entier	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);sprintf(tmp3,"Q%d",jump);quadr($2,tmp3,tmp2,tmp);}
-	 | const_entier op_comp const_reel	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);sprintf(tmp4,"%d",t+1);sprintf(tmp3,"Q%d",jump);quadr($2,tmp3,tmp,tmp4);}
-	 | const_reel op_comp const_entier	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);sprintf(tmp2,"%d",$3);sprintf(tmp3,"Q%d",jump);quadr($2,tmp3,tmp2,tmp);}
-	 | const_reel op_comp const_reel	{t=t+1;sprintf(tmp,"%d",$1);sprintf(tmp2,"%d",$3);sprintf(tmp3,"Q%d",jump);quadr($2,tmp3,tmp,tmp2);}	
-	 | identificateur op_comp identificateur {t=t+1;sprintf(tmp,"%d",$3);sprintf(tmp3,"Q%d",jump);quadr($2,tmp3,$1,tmp);}			     	 
+cond: identificateur op_comp const_entier 
+	 | identificateur op_comp const_reel 	     
+	 | const_entier op_comp const_entier
+	 | const_entier op_comp const_reel	
+	 	 | const_reel op_comp const_entier	
+	 | const_reel op_comp const_reel	
+	 | identificateur op_comp identificateur 		     	 
 ; 
 
 
 //------------------Instruction Affectation-----------
-// on peut affecter un entier  à un reel, c'est pour ça qu'on a rajouté des conditions dans la ligne juste en dessous
+// on peut affecter un entier  à un reel ex: a<--5; ça devient a=5.0 , c'est pour ça qu'on a rajouté des conditions dans la ligne juste en dessous
 
-inst_aff: identificateur op_AFF exp_arith pvg {if(recherche($1)==-1){printf("Variable %s non déclarée.\n",$1);} else if(strcmp(ts[recherche($1)].TypeEntite,type)!=0 && !(strcmp(ts[recherche($1)].TypeEntite,"reel")==0 && strcmp(type,"entier")==0)) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,$1,ts[recherche($1)].TypeEntite);}
-			else {jump=qc;quadr(":=",tmp2,"  ",$1);} }
-		|identificateur op_AFF const_chaine pvg {if(recherche($1)==-1){printf("Variable %s non déclarée.\n",$1);} else if(strcmp(ts[recherche($1)].TypeEntite,"chaine")!=0) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,$1,ts[recherche($1)].TypeEntite);}
-			else {strcpy(type,"chaine");strcpy(tmp2,$3);jump=qc;quadr(":=",tmp2," ",$1);}}
-			| identificateur crochet_gauche const_entier crochet_droit op_AFF exp_arith pvg {if(recherche($1)==-1){printf("Variable %s non déclarée.\n",$1);} else if(strcmp(ts[recherche($1)].TypeEntite,type)!=0 && !(strcmp(ts[recherche($1)].TypeEntite,"reel")==0 && strcmp(type,"entier")==0)) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,$1,ts[recherche($1)].TypeEntite);}
+inst_aff: identificateur op_AFF exp_arith pvg { if(recherche($1)==-1){printf("Variable %s non declaree(utilisee a la ligne %d).\n",$1,nb_ligne-1);} else   if(strcmp(ts[recherche($1)].TypeEntite,type)!=0 && !(strcmp(ts[recherche($1)].TypeEntite,"reel")==0 && strcmp(type,"entier")==0)) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,$1,ts[recherche($1)].TypeEntite);}
+			else {quadr(":=",tmp2," ",$1);}}
+	      |identificateur op_AFF const_chaine pvg {if(recherche($1)==-1){printf("Variable %s non declaree(utilisee a la ligne %d).\n",$1,nb_ligne-1);} else strcpy(type,"chaine");if(strcmp(ts[recherche($1)].TypeEntite,type)!=0) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,$1,ts[recherche($1)].TypeEntite);}
+			else {quadr(":=",$3," ",$1);}}
+		  | identificateur crochet_gauche const_entier crochet_droit op_AFF exp_arith pvg {if(recherche($1)==-1){printf("Variable %s non declaree(utilisee a la ligne %d).\n",$1,nb_ligne-1);} else if(strcmp(ts[recherche($1)].TypeEntite,type)!=0 && !(strcmp(ts[recherche($1)].TypeEntite,"reel")==0 && strcmp(type,"entier")==0)) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,$1,ts[recherche($1)].TypeEntite);}
 			else if($3>ts[recherche($1)].TailleEntite-1){printf("Dépassement de la taille du tableau %s qui est de :  %d",$1,ts[recherche($1)].TailleEntite);} 
-			else {jump=qc;quadr(":=",tmp2,"  ",$1);} }
+			else {quadr(":=",tmp2,"  ",$1);} }	
 ; 
 exp_arith: exp_arith op_arith identificateur  { if( $3==0 && strcmp("/",$2)==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);} 
-			else {sprintf(tmp,"T%d",t);sprintf(tmp2,"T%d",t+1);quadr($2,tmp,$3,tmp2);sprintf(tmp2,"T%d",t+1);t=t+1;}}
-           |exp_arith op_arith const_reel { if($3==0 && strcmp("/",$2)==0){printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);}
-            else{sprintf(tmp,"%.2f",$3);sprintf(tmp3,"T%d",t);sprintf(tmp4,"T%d",t+1);quadr($2,tmp2,tmp,tmp4);sprintf(tmp2,"T%d",t+1);t=t+1; }}
+			else {sprintf(tmp,"%s",$3);sprintf(tmp3,"T%d",t);quadr($2,tmp2,tmp,tmp3);sprintf(tmp2,"T%d",t);t=t+1;}}
+           |exp_arith op_arith const_reel  { if($3==0 && strcmp("/",$2)==0){printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);}
+            else{sprintf(tmp,"%.2f",$3);sprintf(tmp3,"T%d",t);quadr($2,tmp2,tmp,tmp3);sprintf(tmp2,"T%d",t);t=t+1;}}
 		   |exp_arith op_arith const_entier  { if ( $3==0 && strcmp("/",$2)==0) {printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);}
-		    else { sprintf(tmp,"%d",$3);sprintf(tmp3,"T%d",t);sprintf(tmp4,"T%d",t+1);quadr($2,tmp2,tmp,tmp4);sprintf(tmp2,"T%d",t+1);t=t+1;}}
-		   |identificateur {strcpy(type,ts[recherche($1)].TypeEntite);strcpy(tmp2,$1);}
-		   |const_reel {strcpy(type,"reel");sprintf(tmp2,"%.2f",$1);}
-		   |const_entier {strcpy(type,"entier");sprintf(tmp2,"%d",$1);}
+		   else {sprintf(tmp,"%d",$3);sprintf(tmp3,"T%d",t);quadr($2,tmp2,tmp,tmp3);sprintf(tmp2,"T%d",t);t=t+1;}}
+		   |identificateur {strcpy(type,ts[recherche($1)].TypeEntite);sprintf(tmp2,"%s",$1);}
+		   |const_reel {strcpy(type,"reel");sprintf(tmp2,"%.2f",$1);sprintf(tmp3,"T%.2f",$1);}
+		   |const_entier {strcpy(type,"entier");sprintf(tmp2,"%d",$1);sprintf(tmp3,"T%d",$1);}
 ;
 
 //----------------constante = entier ou reel -----------------
@@ -125,6 +131,9 @@ constante: const_entier {strcpy(type,"entier");}
 ;
 
 %%
+
+
+
 int main()
 {
 printf("Taper stop pour arreter \n");
@@ -132,7 +141,7 @@ yyparse();
 printf("\n\n");
 afficher();
 printf("\n\n");
-afccer_qdr();
-
+afficher_qdr();
+system("PAUSE");
 
 }

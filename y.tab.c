@@ -86,7 +86,7 @@ int sauv_cond=0,sauv_inst=0;
 
 
 /* Line 189 of yacc.c  */
-#line 90 "synt.tab.c"
+#line 90 "y.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -141,6 +141,34 @@ int sauv_cond=0,sauv_inst=0;
      crochet_droit = 283
    };
 #endif
+/* Tokens.  */
+#define mc_ALGORITHME 258
+#define mc_entier 259
+#define mc_reel 260
+#define mc_chaine 261
+#define mc_VAR 262
+#define mc_DEBUT 263
+#define mc_FIN 264
+#define mc_Pour 265
+#define mc_jusque 266
+#define mc_Faire 267
+#define mc_Fait 268
+#define mc_SI 269
+#define op_AFF 270
+#define op_comp 271
+#define op_arith 272
+#define bar 273
+#define parenthese_gauche 274
+#define parenthese_droite 275
+#define identificateur 276
+#define const_entier 277
+#define const_reel 278
+#define const_chaine 279
+#define dp 280
+#define pvg 281
+#define crochet_gauche 282
+#define crochet_droit 283
+
 
 
 
@@ -157,7 +185,7 @@ char* chaine;
 
 
 /* Line 214 of yacc.c  */
-#line 161 "synt.tab.c"
+#line 189 "y.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -169,7 +197,7 @@ char* chaine;
 
 
 /* Line 264 of yacc.c  */
-#line 173 "synt.tab.c"
+#line 201 "y.tab.c"
 
 #ifdef short
 # undef short
@@ -1463,91 +1491,91 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 27 "synt.y"
-    {printf("----------programme syntaxiquement juste------\n ecrire quelque chose puis appuyer sur entre pour afficher la table des symboles et des quadruplets");;}
+    {printf("----------programme syntaxiquement juste------\n ecrire quelque chose puis appuyer sur entre pour afficher la table des symboles et des quadruplets");}
     break;
 
   case 10:
 
 /* Line 1455 of yacc.c  */
 #line 46 "synt.y"
-    {inserer((yyvsp[(1) - (7)].chaine),"entier",(yyvsp[(3) - (7)].entier));;}
+    {inserer((yyvsp[(1) - (7)].chaine),"entier",(yyvsp[(3) - (7)].entier));}
     break;
 
   case 11:
 
 /* Line 1455 of yacc.c  */
 #line 47 "synt.y"
-    {inserer((yyvsp[(1) - (7)].chaine),"reel",(yyvsp[(3) - (7)].entier));;}
+    {inserer((yyvsp[(1) - (7)].chaine),"reel",(yyvsp[(3) - (7)].entier));}
     break;
 
   case 12:
 
 /* Line 1455 of yacc.c  */
 #line 48 "synt.y"
-    {inserer((yyvsp[(1) - (7)].chaine),"chaine",(yyvsp[(3) - (7)].entier));;}
+    {inserer((yyvsp[(1) - (7)].chaine),"chaine",(yyvsp[(3) - (7)].entier));}
     break;
 
   case 13:
 
 /* Line 1455 of yacc.c  */
 #line 51 "synt.y"
-    {inserer((yyvsp[(3) - (3)].chaine),"entier",1);;}
+    {inserer((yyvsp[(3) - (3)].chaine),"entier",1);}
     break;
 
   case 14:
 
 /* Line 1455 of yacc.c  */
 #line 52 "synt.y"
-    {inserer((yyvsp[(3) - (3)].chaine),"reel",1);;}
+    {inserer((yyvsp[(3) - (3)].chaine),"reel",1);}
     break;
 
   case 15:
 
 /* Line 1455 of yacc.c  */
 #line 53 "synt.y"
-    {inserer((yyvsp[(3) - (3)].chaine),"chaine",1);;}
+    {inserer((yyvsp[(3) - (3)].chaine),"chaine",1);}
     break;
 
   case 16:
 
 /* Line 1455 of yacc.c  */
 #line 56 "synt.y"
-    {inserer((yyvsp[(1) - (4)].chaine),"entier",1);;}
+    {inserer((yyvsp[(1) - (4)].chaine),"entier",1);}
     break;
 
   case 17:
 
 /* Line 1455 of yacc.c  */
 #line 57 "synt.y"
-    {inserer((yyvsp[(1) - (4)].chaine),"reel",1);;}
+    {inserer((yyvsp[(1) - (4)].chaine),"reel",1);}
     break;
 
   case 18:
 
 /* Line 1455 of yacc.c  */
 #line 58 "synt.y"
-    {inserer((yyvsp[(1) - (4)].chaine),"chaine",1);;}
+    {inserer((yyvsp[(1) - (4)].chaine),"chaine",1);}
     break;
 
   case 19:
 
 /* Line 1455 of yacc.c  */
 #line 62 "synt.y"
-    {if(recherche((yyvsp[(1) - (3)].chaine))!=-1) printf("-----------ERREUR:semantique - la variable: %s deja declare ligne %d  \n ",(yyvsp[(1) - (3)].chaine),nb_ligne,"------------");;}
+    {if(recherche((yyvsp[(1) - (3)].chaine))!=-1) printf("-----------ERREUR:semantique - la variable: %s deja declare ligne %d  \n ",(yyvsp[(1) - (3)].chaine),nb_ligne,"------------");}
     break;
 
   case 20:
 
 /* Line 1455 of yacc.c  */
 #line 63 "synt.y"
-    {if(recherche((yyvsp[(1) - (1)].chaine))!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare ligne %d  \n ",(yyvsp[(1) - (1)].chaine),nb_ligne,"------------");;}
+    {if(recherche((yyvsp[(1) - (1)].chaine))!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare ligne %d  \n ",(yyvsp[(1) - (1)].chaine),nb_ligne,"------------");}
     break;
 
   case 33:
 
 /* Line 1455 of yacc.c  */
 #line 89 "synt.y"
-    {;}
+    {}
     break;
 
   case 41:
@@ -1555,7 +1583,7 @@ yyreduce:
 /* Line 1455 of yacc.c  */
 #line 108 "synt.y"
     { if(recherche((yyvsp[(1) - (4)].chaine))==-1){printf("Variable %s non declaree(utilisee a la ligne %d).\n",(yyvsp[(1) - (4)].chaine),nb_ligne-1);} else   if(strcmp(ts[recherche((yyvsp[(1) - (4)].chaine))].TypeEntite,type)!=0 && !(strcmp(ts[recherche((yyvsp[(1) - (4)].chaine))].TypeEntite,"reel")==0 && strcmp(type,"entier")==0)) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,(yyvsp[(1) - (4)].chaine),ts[recherche((yyvsp[(1) - (4)].chaine))].TypeEntite);}
-			else {quadr(":=",tmp2," ",(yyvsp[(1) - (4)].chaine));};}
+			else {quadr(":=",tmp2," ",(yyvsp[(1) - (4)].chaine));}}
     break;
 
   case 42:
@@ -1563,7 +1591,7 @@ yyreduce:
 /* Line 1455 of yacc.c  */
 #line 110 "synt.y"
     {if(recherche((yyvsp[(1) - (4)].chaine))==-1){printf("Variable %s non declaree(utilisee a la ligne %d).\n",(yyvsp[(1) - (4)].chaine),nb_ligne-1);} else strcpy(type,"chaine");if(strcmp(ts[recherche((yyvsp[(1) - (4)].chaine))].TypeEntite,type)!=0) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,(yyvsp[(1) - (4)].chaine),ts[recherche((yyvsp[(1) - (4)].chaine))].TypeEntite);}
-			else {quadr(":=",(yyvsp[(3) - (4)].chaine)," ",(yyvsp[(1) - (4)].chaine));};}
+			else {quadr(":=",(yyvsp[(3) - (4)].chaine)," ",(yyvsp[(1) - (4)].chaine));}}
     break;
 
   case 43:
@@ -1572,7 +1600,7 @@ yyreduce:
 #line 112 "synt.y"
     {if(recherche((yyvsp[(1) - (7)].chaine))==-1){printf("Variable %s non declaree(utilisee a la ligne %d).\n",(yyvsp[(1) - (7)].chaine),nb_ligne-1);} else if(strcmp(ts[recherche((yyvsp[(1) - (7)].chaine))].TypeEntite,type)!=0 && !(strcmp(ts[recherche((yyvsp[(1) - (7)].chaine))].TypeEntite,"reel")==0 && strcmp(type,"entier")==0)) {printf("-----------Erreur de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_ligne,(yyvsp[(1) - (7)].chaine),ts[recherche((yyvsp[(1) - (7)].chaine))].TypeEntite);}
 			else if((yyvsp[(3) - (7)].entier)>ts[recherche((yyvsp[(1) - (7)].chaine))].TailleEntite-1){printf("Dépassement de la taille du tableau %s qui est de :  %d",(yyvsp[(1) - (7)].chaine),ts[recherche((yyvsp[(1) - (7)].chaine))].TailleEntite);} 
-			else {quadr(":=",tmp2,"  ",(yyvsp[(1) - (7)].chaine));} ;}
+			else {quadr(":=",tmp2,"  ",(yyvsp[(1) - (7)].chaine));} }
     break;
 
   case 44:
@@ -1580,7 +1608,7 @@ yyreduce:
 /* Line 1455 of yacc.c  */
 #line 116 "synt.y"
     { if( (yyvsp[(3) - (3)].chaine)==0 && strcmp("/",(yyvsp[(2) - (3)].chaine))==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);} 
-			else {sprintf(tmp,"%s",(yyvsp[(3) - (3)].chaine));sprintf(tmp3,"T%d",t);quadr((yyvsp[(2) - (3)].chaine),tmp2,tmp,tmp3);sprintf(tmp2,"T%d",t);t=t+1;};}
+			else {sprintf(tmp,"%s",(yyvsp[(3) - (3)].chaine));sprintf(tmp3,"T%d",t);quadr((yyvsp[(2) - (3)].chaine),tmp2,tmp,tmp3);sprintf(tmp2,"T%d",t);t=t+1;}}
     break;
 
   case 45:
@@ -1588,7 +1616,7 @@ yyreduce:
 /* Line 1455 of yacc.c  */
 #line 118 "synt.y"
     { if((yyvsp[(3) - (3)].reel)==0 && strcmp("/",(yyvsp[(2) - (3)].chaine))==0){printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);}
-            else{sprintf(tmp,"%.2f",(yyvsp[(3) - (3)].reel));sprintf(tmp3,"T%d",t);quadr((yyvsp[(2) - (3)].chaine),tmp2,tmp,tmp3);sprintf(tmp2,"T%d",t);t=t+1;};}
+            else{sprintf(tmp,"%.2f",(yyvsp[(3) - (3)].reel));sprintf(tmp3,"T%d",t);quadr((yyvsp[(2) - (3)].chaine),tmp2,tmp,tmp3);sprintf(tmp2,"T%d",t);t=t+1;}}
     break;
 
   case 46:
@@ -1596,55 +1624,55 @@ yyreduce:
 /* Line 1455 of yacc.c  */
 #line 120 "synt.y"
     { if ( (yyvsp[(3) - (3)].entier)==0 && strcmp("/",(yyvsp[(2) - (3)].chaine))==0) {printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);}
-		   else {sprintf(tmp,"%d",(yyvsp[(3) - (3)].entier));sprintf(tmp3,"T%d",t);quadr((yyvsp[(2) - (3)].chaine),tmp2,tmp,tmp3);sprintf(tmp2,"T%d",t);t=t+1;};}
+		   else {sprintf(tmp,"%d",(yyvsp[(3) - (3)].entier));sprintf(tmp3,"T%d",t);quadr((yyvsp[(2) - (3)].chaine),tmp2,tmp,tmp3);sprintf(tmp2,"T%d",t);t=t+1;}}
     break;
 
   case 47:
 
 /* Line 1455 of yacc.c  */
 #line 122 "synt.y"
-    {strcpy(type,ts[recherche((yyvsp[(1) - (1)].chaine))].TypeEntite);sprintf(tmp2,"%s",(yyvsp[(1) - (1)].chaine));;}
+    {strcpy(type,ts[recherche((yyvsp[(1) - (1)].chaine))].TypeEntite);sprintf(tmp2,"%s",(yyvsp[(1) - (1)].chaine));}
     break;
 
   case 48:
 
 /* Line 1455 of yacc.c  */
 #line 123 "synt.y"
-    {strcpy(type,"reel");sprintf(tmp2,"%.2f",(yyvsp[(1) - (1)].reel));sprintf(tmp3,"T%.2f",(yyvsp[(1) - (1)].reel));;}
+    {strcpy(type,"reel");sprintf(tmp2,"%.2f",(yyvsp[(1) - (1)].reel));sprintf(tmp3,"T%.2f",(yyvsp[(1) - (1)].reel));}
     break;
 
   case 49:
 
 /* Line 1455 of yacc.c  */
 #line 124 "synt.y"
-    {strcpy(type,"entier");sprintf(tmp2,"%d",(yyvsp[(1) - (1)].entier));sprintf(tmp3,"T%d",(yyvsp[(1) - (1)].entier));;}
+    {strcpy(type,"entier");sprintf(tmp2,"%d",(yyvsp[(1) - (1)].entier));sprintf(tmp3,"T%d",(yyvsp[(1) - (1)].entier));}
     break;
 
   case 50:
 
 /* Line 1455 of yacc.c  */
 #line 128 "synt.y"
-    {strcpy(type,"entier");;}
+    {strcpy(type,"entier");}
     break;
 
   case 51:
 
 /* Line 1455 of yacc.c  */
 #line 129 "synt.y"
-    {strcpy(type,"reel");;}
+    {strcpy(type,"reel");}
     break;
 
   case 52:
 
 /* Line 1455 of yacc.c  */
 #line 130 "synt.y"
-    {strcpy(type,"chaine");;}
+    {strcpy(type,"chaine");}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1648 "synt.tab.c"
+#line 1676 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1857,9 +1885,6 @@ yyreturn:
 
 /* Line 1675 of yacc.c  */
 #line 133 "synt.y"
-
-
-
 
 int main()
 {

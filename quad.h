@@ -49,7 +49,7 @@ void ajour_quad(int num_quad, int colon_quad, char val [])
 }
 
 
-void afccer_qdr()
+void afficher_qdr()
 {
 	printf("/*********************Les Quadruplets***********************/\n");
 	int i;
