@@ -10,9 +10,10 @@ extern YYSTYPE yylval;
 lettre [a-zA-Z]
 chiffre [0-9]
 idf {lettre}({lettre}|{chiffre})*
-constReel {chiffre}+"."{chiffre}+
-constEntier [0-9]*
-constChaine \"([^\"]*)*\" 
+constReel {chiffre}+"."{chiffre}+|\-{chiffre}+"."{chiffre}+
+constEntier [0-9]*|\-[0-9]*
+constChaine \"([^\"]*)*\"
+
 
 %%
 stop yyterminate();
@@ -42,8 +43,8 @@ SI {nb_colonne+=yyleng; return mc_SI; }
 {idf} {if (yyleng >12) printf ("erreur , il faut moins de 12 car") ;
         else {yylval.chaine=strdup(yytext);	nb_colonne+=yyleng; return identificateur;}}
 		
-{constEntier} {yylval.entier=atoi(yytext); nb_colonne+=yyleng; return const_entier;}
-{constReel} {yylval.reel=atof(yytext); nb_colonne+=yyleng; return const_reel;}
+{constEntier} {if(atoi(yytext)>32767 || atoi(yytext)<-32767){printf("Dépassement de valeur maximale.\n ");} else yylval.entier=atoi(yytext); nb_colonne+=yyleng; return const_entier;}
+{constReel} {if(atoi(yytext)>32767 || atoi(yytext)<-32767){printf("Dépassement de valeur maximale.\n ");} else yylval.reel=atof(yytext); nb_colonne+=yyleng; return const_reel;}
 {constChaine} {yylval.chaine=strdup(yytext); nb_colonne+=yyleng; return const_chaine;}
 	
 "(" {nb_colonne+=yyleng; return parenthese_gauche;}
