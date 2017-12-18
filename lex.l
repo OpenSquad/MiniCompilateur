@@ -43,8 +43,8 @@ SI {nb_colonne+=yyleng; return mc_SI; }
 {idf} {if (yyleng >12) printf ("erreur , il faut moins de 12 car") ;
         else {yylval.chaine=strdup(yytext);	nb_colonne+=yyleng; return identificateur;}}
 		
-{constEntier} {if(atoi(yytext)>32767 || atoi(yytext)<-32767){printf("Dépassement de valeur maximale.\n ");} else yylval.entier=atoi(yytext); nb_colonne+=yyleng; return const_entier;}
-{constReel} {if(atoi(yytext)>32767 || atoi(yytext)<-32767){printf("Dépassement de valeur maximale.\n ");} else yylval.reel=atof(yytext); nb_colonne+=yyleng; return const_reel;}
+{constEntier} {if(atoi(yytext)>32767 || atoi(yytext)<-32767){printf("Dépassement de valeur maximale.\n "); return ;} else yylval.entier=atoi(yytext);return const_entier;}
+{constReel} {if(atoi(yytext)>32767 || atoi(yytext)<-32767){printf("Dépassement de valeur maximale.\n "); return ;} else yylval.reel=atof(yytext);return const_reel;}
 {constChaine} {yylval.chaine=strdup(yytext); nb_colonne+=yyleng; return const_chaine;}
 	
 "(" {nb_colonne+=yyleng; return parenthese_gauche;}

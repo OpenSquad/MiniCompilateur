@@ -902,12 +902,12 @@ YY_RULE_SETUP
 case 19:
 YY_RULE_SETUP
 #line 46 "lex.l"
-{if(atoi(yytext)>32767 || atoi(yytext)<-32767){printf("Dépassement de valeur maximale.\n ");} else yylval.entier=atoi(yytext); nb_colonne+=yyleng; return const_entier;}
+{if(atoi(yytext)>32767 || atoi(yytext)<-32767){printf("Dépassement de valeur maximale.\n "); return ;} else yylval.entier=atoi(yytext);return const_entier;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
 #line 47 "lex.l"
-{if(atoi(yytext)>32767 || atoi(yytext)<-32767){printf("Dépassement de valeur maximale.\n ");} else yylval.reel=atof(yytext); nb_colonne+=yyleng; return const_reel;}
+{if(atoi(yytext)>32767 || atoi(yytext)<-32767){printf("Dépassement de valeur maximale.\n "); return ;} else yylval.reel=atof(yytext);return const_reel;}
 	YY_BREAK
 case 21:
 /* rule 21 can match eol */
