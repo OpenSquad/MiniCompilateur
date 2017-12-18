@@ -10,8 +10,8 @@ extern YYSTYPE yylval;
 lettre [a-zA-Z]
 chiffre [0-9]
 idf {lettre}({lettre}|{chiffre})*
-constReel {chiffre}+"."{chiffre}+|\-{chiffre}+"."{chiffre}+
-constEntier [0-9]*|\-[0-9]*
+constReel {chiffre}+"."{chiffre}+|\-{chiffre}+"."{chiffre}+|\+{chiffre}+"."{chiffre}+
+constEntier [0-9]*|\-[0-9]*|\+[0-9]*
 constChaine \"([^\"]*)*\"
 
 
@@ -44,7 +44,7 @@ SI {nb_colonne+=yyleng; return mc_SI; }
         else {yylval.chaine=strdup(yytext);	nb_colonne+=yyleng; return identificateur;}}
 		
 {constEntier} {if(atoi(yytext)>32767 || atoi(yytext)<-32767){printf("Dépassement de valeur maximale.\n "); return ;} else yylval.entier=atoi(yytext);return const_entier;}
-{constReel} {if(atoi(yytext)>32767 || atoi(yytext)<-32767){printf("Dépassement de valeur maximale.\n "); return ;} else yylval.reel=atof(yytext);return const_reel;}
+{constReel} {if(atof(yytext)>32767 || atof(yytext)<-32767){printf("Dépassement de valeur maximale.\n "); return ;} else yylval.reel=atof(yytext);return const_reel;}
 {constChaine} {yylval.chaine=strdup(yytext); nb_colonne+=yyleng; return const_chaine;}
 	
 "(" {nb_colonne+=yyleng; return parenthese_gauche;}
