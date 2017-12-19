@@ -7,7 +7,9 @@
 extern nb_ligne;
 extern nb_colonne;
 extern yytext;
+extern err;
 extern taille;
+extern bz;
 int t=0; // Compteur des états temporaires
 int qc=0;
 char tmp[20],tmp2[20],tmp3[20],type[20],tmp4[20],tmp6[20],tmp7[20];
@@ -28,6 +30,7 @@ char* chaine;}
 %%
 
 structure_generale:dec_algo mc_VAR partieDeclaration mc_DEBUT partieInstruction mc_FIN {printf("----------programme syntaxiquement juste------\n ecrire quelque chose puis appuyer sur entre pour afficher la table des symboles et des quadruplets");}
+| dec_algo mc_VAR mc_DEBUT mc_FIN{printf("----- ALGO VIDE -------");return 0;}
 ;
 
 
@@ -62,8 +65,8 @@ dec_var: identificateur dp mc_entier pvg {inserer($1,"entier",1);}
 ;
 
 
-ListeIDF: identificateur bar ListeIDF {if(recherche($1)!=-1) printf("-----------ERREUR:semantique - la variable: %s deja declare ligne %d  \n ",$1,nb_ligne,"------------");}
-			           | identificateur  {if(recherche($1)!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare ligne %d  \n ",$1,nb_ligne,"------------");}
+ListeIDF: identificateur bar ListeIDF {if(recherche($1)!=-1) printf("-ERREUR:semantique - la variable: %s deja declare ligne %d  \n ",$1,nb_ligne,nb_colonne,"------------");}
+			           | identificateur  {if(recherche($1)!=-1) printf("-ERREUR:semantique - la variable: %s deja déclare ligne %d  \n ",$1,nb_ligne,nb_colonne,"------------");}
 ;
 					   
 //------------------PartieInstruction---------------------
@@ -146,13 +149,42 @@ constante: const_entier {strcpy(type,"entier");}
 
 %%
 
+
+void rmSubstr(char *str, const char *toRemove)
+{
+    size_t length = strlen(toRemove);
+    char *found,
+         *next = strstr(str, toRemove);
+
+    for (size_t bytesRemoved = 0; (found = next); bytesRemoved += length)
+    {
+        char *rest = found + length;
+        next = strstr(rest, toRemove);
+        memmove(found - bytesRemoved,
+                rest,
+                next ? next - rest: strlen(rest) + 1);
+    }
+}
+
+
+
 int yyerror(char*  message)
-{ sprintf(message,"%s#",message);
+{ /*sprintf(message,"%s#",message);
+int i=0;
+while(message[i]!="")
 printf("erreur syntaxique: ligne :%d detecte %s ,plus d informations: %s \n",nb_ligne,yytext,message);
-return 1;}
+return 1;*/
+
+rmSubstr(message,"syntax error");
+bz=1;
+printf("COLONNE %d \n TAILLE %d \n ERREUR %d \n",nb_colonne,taille,err);
+return 1;
+
+}
 
 int main()
 {
+
 printf("Taper stop pour arreter \n");
 yyparse();
 printf("\n\n");
