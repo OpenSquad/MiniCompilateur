@@ -1,14 +1,7 @@
 ALGORITHME algo
 VAR entier a;entier c;chaine d;
 reel a|b;
-f[5]:entier;a:entier; b:reel;
-//dazdazdazdzada
-DEBUT
-/*dzadzadz
-gcfh
-cvbcvadaada*/
+Faire a<--b;
+SI (a<2)
 
-f[2]<--6+2/0*6;
-b<--b+b;
-b<--5+b;
 FIN

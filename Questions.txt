@@ -1,35 +1,31 @@
--affecter un entier à un reel ? on le transform en un reel ?
-reel c ;
--je fais : c<--5; ça sauvegarde : c<--5.0;
----------------------
--peut on mettre sauv_inst dans la routine B?
-------------------------------
-entier = reel + entier
-------------------------------
-if , instruction ou expression?
-----------------------
+EN PLUS:
+- a/5+6-8/A (quad)
+- cond: a>b+5 (quad)
+-affecter entier à reel
+valR [+-]?(0|[1-9][0-9]*)"."[0-9]*[1-9] 
+
+
+ALGORITHME a
+VAR a:entier;c:chaine;
+b:reel;
+DEBUT
+c<--5;
+
+=====================================================
 ALGORITHME algo
 VAR entier a;entier c;chaine d;
 reel a|b;
-a[5]:entier;a:entier; b:reel;
-//dazdazdazdzada
-DEBUT
-/*dzadzadzada*/
-a<--5;
-d<--"hey";
-a<--5+7/8;
-a[0]<--6;
-a[3]<--6;
-b<--b+b;
-b<--5+b;
-FIN
+=====================================================
+ALGORITHME algo
+VAR entier entier;entier c;chaine d;
+reel a|b;
 
+ALGORITHME algo
+VAR entier a;enti c;chaine d;
 
-sprintf(tmp4,"%d",sauv_inst); quadr("BNZ",tmp4,"condition test"," ");t++;sprintf(tmp4,"%s",t);ajour_quad(sauv_fin,2,tmp4);
-
-quadr("BR"," "," "," ");sauv_fin=t;t++;sprintf(tmp4,"%s",t);ajour_quad(sauv_cond,2,tmp4);
-
-quadr("BR"," "," "," ");sauv_cond=t;t++;sauv_inst=t;
+ALGORITHME algo
+VAR entier a;entier c;chaine d;
+Faire a<-2; SI (6.2>6)
 
 /*dzadzada*/
 //dadazdzadza
@@ -40,7 +36,11 @@ f[5]:entier;a:entier; b:reel;
 //dazdazdazdzada
 DEBUT 
 /*dzadzadzada*/
-Faire a<--2; SI (a=5)
+Faire a<--2; SI (6.2>6)
+Faire a<--2; SI (6.5<6.2)
+Faire a<--2; SI (5.2>a)
+Faire a<--2; SI (5<b)
+Faire a<--2; SI (a!=d)
 a<--3+5+7;
 Pour a<--5 jusque 5 Faire a<--9;Faire a<--7; SI (a=5)
 a<--5;
@@ -51,10 +51,6 @@ FIN
 
 -----------------TEST-------------
 afficher la ligne et collone (division /0)
-
-
-
-
 
 
 
