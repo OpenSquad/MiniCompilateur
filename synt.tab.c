@@ -1466,6 +1466,27 @@ yyreduce:
     {printf("----------programme syntaxiquement juste------\n ecrire quelque chose puis appuyer sur entre pour afficher la table des symboles et des quadruplets");;}
     break;
 
+  case 4:
+
+/* Line 1455 of yacc.c  */
+#line 41 "synt.y"
+    {maj_ts("entier");;}
+    break;
+
+  case 5:
+
+/* Line 1455 of yacc.c  */
+#line 42 "synt.y"
+    {maj_ts("reel");;}
+    break;
+
+  case 6:
+
+/* Line 1455 of yacc.c  */
+#line 43 "synt.y"
+    {maj_ts("chaine");;}
+    break;
+
   case 7:
 
 /* Line 1455 of yacc.c  */
@@ -1491,28 +1512,28 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 50 "synt.y"
-    {if(recherche((yyvsp[(3) - (3)].chaine))!=-1) printf("-----------ERREUR:semantique - la variable: %s deja declare(utilisee a ligne %d colonne %d \n ",(yyvsp[(3) - (3)].chaine),nb_ligne,nb_colonne-taille,"------------");else {inserer((yyvsp[(3) - (3)].chaine),"a",1);};}
+    {if(recherche((yyvsp[(3) - (3)].chaine))!=-1) printf("-----------ERREUR:semantique - la variable: %s deja declare(utilisee a ligne %d colonne %d \n ",(yyvsp[(3) - (3)].chaine),nb_ligne,nb_colonne-taille-1,"------------");else {inserer((yyvsp[(3) - (3)].chaine),"a",1);};}
     break;
 
   case 11:
 
 /* Line 1455 of yacc.c  */
 #line 51 "synt.y"
-    {if(recherche((yyvsp[(3) - (6)].chaine))!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare (utilisee a ligne %d colonne %d )\n ",(yyvsp[(3) - (6)].chaine),nb_ligne,nb_colonne-taille,"------------");else{inserer((yyvsp[(3) - (6)].chaine),"a",(yyvsp[(5) - (6)].entier));};}
+    {if(recherche((yyvsp[(3) - (6)].chaine))!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare (utilisee a ligne %d colonne %d )\n ",(yyvsp[(3) - (6)].chaine),nb_ligne,nb_colonne-taille-1,"------------");else{inserer((yyvsp[(3) - (6)].chaine),"a",(yyvsp[(5) - (6)].entier));};}
     break;
 
   case 12:
 
 /* Line 1455 of yacc.c  */
 #line 52 "synt.y"
-    {if(recherche((yyvsp[(1) - (1)].chaine))!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare (utilisee ligne %d colonne %d )\n ",(yyvsp[(1) - (1)].chaine),nb_ligne,nb_colonne-taille,"------------");else {inserer((yyvsp[(1) - (1)].chaine),"a",1);};}
+    {if(recherche((yyvsp[(1) - (1)].chaine))!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare (utilisee ligne %d colonne %d à\n ",(yyvsp[(1) - (1)].chaine),nb_ligne,nb_colonne-taille-1,"------------");else {inserer((yyvsp[(1) - (1)].chaine),"a",1);};}
     break;
 
   case 13:
 
 /* Line 1455 of yacc.c  */
 #line 53 "synt.y"
-    {if(recherche((yyvsp[(1) - (4)].chaine))!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare (utilisee a ligne %d colonne %d) \n ",(yyvsp[(1) - (4)].chaine),nb_ligne,nb_colonne-taille,"------------");else{inserer((yyvsp[(1) - (4)].chaine),"a",(yyvsp[(3) - (4)].entier));}	;}
+    {if(recherche((yyvsp[(1) - (4)].chaine))!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare (utilisee a ligne %d colonne %d \n ",(yyvsp[(1) - (4)].chaine),nb_ligne,nb_colonne-taille-1,"------------");else{inserer((yyvsp[(1) - (4)].chaine),"a",(yyvsp[(3) - (4)].entier));}	;}
     break;
 
   case 24:
@@ -1695,7 +1716,7 @@ if (strcmp((yyvsp[(5) - (7)].chaine),"=")==0) strcpy(tmp6,"BE");if (strcmp((yyvs
 
 
 /* Line 1455 of yacc.c  */
-#line 1699 "synt.tab.c"
+#line 1720 "synt.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);

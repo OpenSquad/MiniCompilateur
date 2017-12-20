@@ -38,9 +38,9 @@ dec_algo: mc_ALGORITHME identificateur
 ;
 
 //-------------Partie Declaration--------------
-partieDeclaration: partieDeclaration ListeIDF dp mc_entier pvg
-				   |partieDeclaration ListeIDF dp mc_reel pvg
-				   |partieDeclaration ListeIDF dp mc_chaine pvg
+partieDeclaration: partieDeclaration ListeIDF dp mc_entier pvg {maj_ts("entier");}
+				   |partieDeclaration ListeIDF dp mc_reel pvg {maj_ts("reel");}
+				   |partieDeclaration ListeIDF dp mc_chaine pvg {maj_ts("chaine");}
 				   |ListeIDF dp mc_entier pvg {maj_ts("entier");}
 				   |ListeIDF dp mc_chaine pvg {maj_ts("chaine");}
 				   |ListeIDF dp mc_reel pvg {maj_ts("reel");}
@@ -49,8 +49,8 @@ partieDeclaration: partieDeclaration ListeIDF dp mc_entier pvg
 
 ListeIDF: ListeIDF bar identificateur {if(recherche($3)!=-1) printf("-----------ERREUR:semantique - la variable: %s deja declare(utilisee a ligne %d colonne %d \n ",$3,nb_ligne,nb_colonne-taille-1,"------------");else {inserer($3,"a",1);}}
 		| ListeIDF bar identificateur crochet_gauche const_entier crochet_droit {if(recherche($3)!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare (utilisee a ligne %d colonne %d )\n ",$3,nb_ligne,nb_colonne-taille-1,"------------");else{inserer($3,"a",$5);}}
-		| identificateur  {if(recherche($1)!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare (utilisee ligne %d colonne %d )\n ",$1,nb_ligne,nb_colonne-taille-1,"------------");else {inserer($1,"a",1);}}
-        |  identificateur crochet_gauche const_entier crochet_droit {if(recherche($1)!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare (utilisee a ligne %d colonne %d) \n ",$1,nb_ligne,nb_colonne-taille-1,"------------");else{inserer($1,"a",$3);}	}
+		| identificateur  {if(recherche($1)!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare (utilisee ligne %d colonne %d à\n ",$1,nb_ligne,nb_colonne-taille-1,"------------");else {inserer($1,"a",1);}}
+        |  identificateur crochet_gauche const_entier crochet_droit {if(recherche($1)!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare (utilisee a ligne %d colonne %d \n ",$1,nb_ligne,nb_colonne-taille-1,"------------");else{inserer($1,"a",$3);}	}
 		;
 
 					   
