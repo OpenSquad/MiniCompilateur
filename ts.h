@@ -36,6 +36,16 @@ void inserer(char nom[], char type[], int taille)
 		CpTabSym++;
 	}
 }
+void maj_ts(char type[])
+{    int i=0;
+     while(i<CpTabSym)
+	{
+		if (strcmp(ts[i].TypeEntite,"a")==0) 
+			strcpy(ts[i].TypeEntite,type);
+		i++;
+	}
+	
+}
 
 void afficher ()
 {

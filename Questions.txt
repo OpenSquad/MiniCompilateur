@@ -6,10 +6,13 @@ valR [+-]?(0|[1-9][0-9]*)"."[0-9]*[1-9]
 
 
 ALGORITHME a
-VAR a:entier;c:chaine;
+VAR a|b:entier;
 b:reel;
 DEBUT
 c<--5;
+c<--5;
+c<--5/55/0;
+
 
 =====================================================
 ALGORITHME algo

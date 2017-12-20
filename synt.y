@@ -7,15 +7,14 @@
 extern nb_ligne;
 extern nb_colonne;
 extern yytext;
-extern err;
 extern taille;
-extern bz;
 int t=0; // Compteur des états temporaires
 int qc=0;
 char tmp[20],tmp2[20],tmp3[20],type[20],tmp4[20],tmp6[20],tmp7[20];
 int x=0;
 int jump=0;
 int sauv_cond=0,sauv_inst=0,sauv_fin;
+int count=0;
 
 %}
 
@@ -30,7 +29,6 @@ char* chaine;}
 %%
 
 structure_generale:dec_algo mc_VAR partieDeclaration mc_DEBUT partieInstruction mc_FIN {printf("----------programme syntaxiquement juste------\n ecrire quelque chose puis appuyer sur entre pour afficher la table des symboles et des quadruplets");}
-| dec_algo mc_VAR mc_DEBUT mc_FIN{printf("----- ALGO VIDE -------");return 0;}
 ;
 
 
@@ -40,34 +38,21 @@ dec_algo: mc_ALGORITHME identificateur
 ;
 
 //-------------Partie Declaration--------------
-partieDeclaration: dec_var2 partieDeclaration 
-						  | dec_var2	
-				  |dec_tableau partieDeclaration
-					         | dec_tableau
-				  |dec_var partieDeclaration
-						 | dec_var
-;
-
-//----------------les declarations------------
-dec_tableau: identificateur crochet_gauche const_entier crochet_droit dp mc_entier pvg {inserer($1,"entier",$3);}
-	         |identificateur crochet_gauche const_entier crochet_droit dp mc_reel pvg   {inserer($1,"reel",$3);}
-			 |identificateur crochet_gauche const_entier crochet_droit dp mc_chaine pvg  {inserer($1,"chaine",$3);}
-;
-
-dec_var2: mc_entier ListeIDF pvg {inserer($3,"entier",1);}
-		 | mc_reel ListeIDF pvg   {inserer($3,"reel",1);}
-		 | mc_chaine ListeIDF pvg  {inserer($3,"chaine",1);}
-;
-
-dec_var: identificateur dp mc_entier pvg {inserer($1,"entier",1);}
-	     |identificateur dp mc_reel pvg  {inserer($1,"reel",1);}
-         | identificateur dp mc_chaine pvg {inserer($1,"chaine",1);}
+partieDeclaration: partieDeclaration ListeIDF dp mc_entier pvg
+				   |partieDeclaration ListeIDF dp mc_reel pvg
+				   |partieDeclaration ListeIDF dp mc_chaine pvg
+				   |ListeIDF dp mc_entier pvg {maj_ts("entier");}
+				   |ListeIDF dp mc_chaine pvg {maj_ts("chaine");}
+				   |ListeIDF dp mc_reel pvg {maj_ts("reel");}
 ;
 
 
-ListeIDF: identificateur bar ListeIDF {if(recherche($1)!=-1) printf("-ERREUR:semantique - la variable: %s deja declare ligne %d  \n ",$1,nb_ligne,nb_colonne,"------------");}
-			           | identificateur  {if(recherche($1)!=-1) printf("-ERREUR:semantique - la variable: %s deja déclare ligne %d  \n ",$1,nb_ligne,nb_colonne,"------------");}
-;
+ListeIDF: ListeIDF bar identificateur {if(recherche($3)!=-1) printf("-----------ERREUR:semantique - la variable: %s deja declare ligne %d  \n ",$3,nb_ligne,"------------");else {inserer($3,"a",1);}}
+		| ListeIDF bar identificateur crochet_gauche const_entier crochet_droit {if(recherche($3)!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare ligne %d  \n ",$3,nb_ligne,"------------");else{inserer($3,"a",$5);}}
+		| identificateur  {if(recherche($1)!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare ligne %d  \n ",$1,nb_ligne,"------------");else {inserer($1,"a",1);}}
+        |  identificateur crochet_gauche const_entier crochet_droit {if(recherche($1)!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare ligne %d  \n ",$1,nb_ligne,"------------");else{inserer($1,"a",$3);}	}
+		;
+
 					   
 //------------------PartieInstruction---------------------
 partieInstruction: inst_aff partieInstruction    
@@ -149,42 +134,16 @@ constante: const_entier {strcpy(type,"entier");}
 
 %%
 
-
-void rmSubstr(char *str, const char *toRemove)
-{
-    size_t length = strlen(toRemove);
-    char *found,
-         *next = strstr(str, toRemove);
-
-    for (size_t bytesRemoved = 0; (found = next); bytesRemoved += length)
-    {
-        char *rest = found + length;
-        next = strstr(rest, toRemove);
-        memmove(found - bytesRemoved,
-                rest,
-                next ? next - rest: strlen(rest) + 1);
-    }
-}
-
-
-
 int yyerror(char*  message)
-{ /*sprintf(message,"%s#",message);
-int i=0;
-while(message[i]!="")
+{ sprintf(message,"%s#",message);
+  const char *ptr = strchr(message, '#');
+  int index;
+
 printf("erreur syntaxique: ligne :%d detecte %s ,plus d informations: %s \n",nb_ligne,yytext,message);
-return 1;*/
-
-rmSubstr(message,"syntax error");
-bz=1;
-printf("COLONNE %d \n TAILLE %d \n ERREUR %d \n",nb_colonne,taille,err);
-return 1;
-
-}
+return 1;}
 
 int main()
 {
-
 printf("Taper stop pour arreter \n");
 yyparse();
 printf("\n\n");
