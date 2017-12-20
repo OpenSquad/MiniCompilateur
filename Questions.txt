@@ -7,7 +7,10 @@ valR [+-]?(0|[1-9][0-9]*)"."[0-9]*[1-9]
 
 ALGORITHME a
 VAR a|b:entier;
-b:reel;
+b|t[5]|a|c:reel;
+t:entier;
+a[5]:entier;
+b:chaine;
 DEBUT
 c<--5;
 c<--5;

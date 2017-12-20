@@ -1491,28 +1491,28 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 50 "synt.y"
-    {if(recherche((yyvsp[(3) - (3)].chaine))!=-1) printf("-----------ERREUR:semantique - la variable: %s deja declare ligne %d  \n ",(yyvsp[(3) - (3)].chaine),nb_ligne,"------------");else {inserer((yyvsp[(3) - (3)].chaine),"a",1);};}
+    {if(recherche((yyvsp[(3) - (3)].chaine))!=-1) printf("-----------ERREUR:semantique - la variable: %s deja declare(utilisee a ligne %d colonne %d \n ",(yyvsp[(3) - (3)].chaine),nb_ligne,nb_colonne-taille,"------------");else {inserer((yyvsp[(3) - (3)].chaine),"a",1);};}
     break;
 
   case 11:
 
 /* Line 1455 of yacc.c  */
 #line 51 "synt.y"
-    {if(recherche((yyvsp[(3) - (6)].chaine))!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare ligne %d  \n ",(yyvsp[(3) - (6)].chaine),nb_ligne,"------------");else{inserer((yyvsp[(3) - (6)].chaine),"a",(yyvsp[(5) - (6)].entier));};}
+    {if(recherche((yyvsp[(3) - (6)].chaine))!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare (utilisee a ligne %d colonne %d )\n ",(yyvsp[(3) - (6)].chaine),nb_ligne,nb_colonne-taille,"------------");else{inserer((yyvsp[(3) - (6)].chaine),"a",(yyvsp[(5) - (6)].entier));};}
     break;
 
   case 12:
 
 /* Line 1455 of yacc.c  */
 #line 52 "synt.y"
-    {if(recherche((yyvsp[(1) - (1)].chaine))!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare ligne %d  \n ",(yyvsp[(1) - (1)].chaine),nb_ligne,"------------");else {inserer((yyvsp[(1) - (1)].chaine),"a",1);};}
+    {if(recherche((yyvsp[(1) - (1)].chaine))!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare (utilisee ligne %d colonne %d )\n ",(yyvsp[(1) - (1)].chaine),nb_ligne,nb_colonne-taille,"------------");else {inserer((yyvsp[(1) - (1)].chaine),"a",1);};}
     break;
 
   case 13:
 
 /* Line 1455 of yacc.c  */
 #line 53 "synt.y"
-    {if(recherche((yyvsp[(1) - (4)].chaine))!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare ligne %d  \n ",(yyvsp[(1) - (4)].chaine),nb_ligne,"------------");else{inserer((yyvsp[(1) - (4)].chaine),"a",(yyvsp[(3) - (4)].entier));}	;}
+    {if(recherche((yyvsp[(1) - (4)].chaine))!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare (utilisee a ligne %d colonne %d) \n ",(yyvsp[(1) - (4)].chaine),nb_ligne,nb_colonne-taille,"------------");else{inserer((yyvsp[(1) - (4)].chaine),"a",(yyvsp[(3) - (4)].entier));}	;}
     break;
 
   case 24:
@@ -1630,7 +1630,7 @@ if (strcmp((yyvsp[(5) - (7)].chaine),"=")==0) strcpy(tmp6,"BE");if (strcmp((yyvs
 
 /* Line 1455 of yacc.c  */
 #line 118 "synt.y"
-    { if( (yyvsp[(3) - (3)].chaine)==0 && strcmp("/",(yyvsp[(2) - (3)].chaine))==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);} 
+    { if( (yyvsp[(3) - (3)].chaine)==0 && strcmp("/",(yyvsp[(2) - (3)].chaine))==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);YYABORT;} 
 			else {sprintf(tmp,"%s",(yyvsp[(3) - (3)].chaine));sprintf(tmp3,"T%d",t);quadr((yyvsp[(2) - (3)].chaine),tmp2,tmp,tmp3);sprintf(tmp2,"T%d",t);t=t+1;};}
     break;
 
@@ -1638,7 +1638,7 @@ if (strcmp((yyvsp[(5) - (7)].chaine),"=")==0) strcpy(tmp6,"BE");if (strcmp((yyvs
 
 /* Line 1455 of yacc.c  */
 #line 120 "synt.y"
-    { if((yyvsp[(3) - (3)].reel)==0 && strcmp("/",(yyvsp[(2) - (3)].chaine))==0){printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);}
+    { if((yyvsp[(3) - (3)].reel)==0 && strcmp("/",(yyvsp[(2) - (3)].chaine))==0){printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);YYABORT;}
             else{sprintf(tmp,"%.2f",(yyvsp[(3) - (3)].reel));sprintf(tmp3,"T%d",t);quadr((yyvsp[(2) - (3)].chaine),tmp2,tmp,tmp3);sprintf(tmp2,"T%d",t);t=t+1;};}
     break;
 
@@ -1646,7 +1646,7 @@ if (strcmp((yyvsp[(5) - (7)].chaine),"=")==0) strcpy(tmp6,"BE");if (strcmp((yyvs
 
 /* Line 1455 of yacc.c  */
 #line 122 "synt.y"
-    { if ( (yyvsp[(3) - (3)].entier)==0 && strcmp("/",(yyvsp[(2) - (3)].chaine))==0) {printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);}
+    { if ( (yyvsp[(3) - (3)].entier)==0 && strcmp("/",(yyvsp[(2) - (3)].chaine))==0) {printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);YYABORT;}
 		   else {sprintf(tmp,"%d",(yyvsp[(3) - (3)].entier));sprintf(tmp3,"T%d",t);quadr((yyvsp[(2) - (3)].chaine),tmp2,tmp,tmp3);sprintf(tmp2,"T%d",t);t=t+1;};}
     break;
 
@@ -1911,11 +1911,8 @@ yyreturn:
 
 
 int yyerror(char*  message)
-{ sprintf(message,"%s#",message);
-  const char *ptr = strchr(message, '#');
-  int index;
-
-printf("erreur syntaxique: ligne :%d detecte %s ,plus d informations: %s \n",nb_ligne,yytext,message);
+{ 
+printf("erreur syntaxique: ligne :%d colonne %d detecte %s ,plus d informations: %s \n",nb_ligne,nb_colonne-taille,yytext,message);
 return 1;}
 
 int main()

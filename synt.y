@@ -47,10 +47,10 @@ partieDeclaration: partieDeclaration ListeIDF dp mc_entier pvg
 ;
 
 
-ListeIDF: ListeIDF bar identificateur {if(recherche($3)!=-1) printf("-----------ERREUR:semantique - la variable: %s deja declare ligne %d  \n ",$3,nb_ligne,"------------");else {inserer($3,"a",1);}}
-		| ListeIDF bar identificateur crochet_gauche const_entier crochet_droit {if(recherche($3)!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare ligne %d  \n ",$3,nb_ligne,"------------");else{inserer($3,"a",$5);}}
-		| identificateur  {if(recherche($1)!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare ligne %d  \n ",$1,nb_ligne,"------------");else {inserer($1,"a",1);}}
-        |  identificateur crochet_gauche const_entier crochet_droit {if(recherche($1)!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare ligne %d  \n ",$1,nb_ligne,"------------");else{inserer($1,"a",$3);}	}
+ListeIDF: ListeIDF bar identificateur {if(recherche($3)!=-1) printf("-----------ERREUR:semantique - la variable: %s deja declare(utilisee a ligne %d colonne %d \n ",$3,nb_ligne,nb_colonne-taille-1,"------------");else {inserer($3,"a",1);}}
+		| ListeIDF bar identificateur crochet_gauche const_entier crochet_droit {if(recherche($3)!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare (utilisee a ligne %d colonne %d )\n ",$3,nb_ligne,nb_colonne-taille-1,"------------");else{inserer($3,"a",$5);}}
+		| identificateur  {if(recherche($1)!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare (utilisee ligne %d colonne %d )\n ",$1,nb_ligne,nb_colonne-taille-1,"------------");else {inserer($1,"a",1);}}
+        |  identificateur crochet_gauche const_entier crochet_droit {if(recherche($1)!=-1) printf("-----------ERREUR:semantique - la variable: %s deja déclare (utilisee a ligne %d colonne %d) \n ",$1,nb_ligne,nb_colonne-taille-1,"------------");else{inserer($1,"a",$3);}	}
 		;
 
 					   
@@ -115,11 +115,11 @@ inst_aff: identificateur op_AFF exp_arith pvg { if(recherche($1)==-1){printf("Va
 			else if($3>ts[recherche($1)].TailleEntite-1){printf("Dépassement de la taille du tableau %s qui est de :  %d",$1,ts[recherche($1)].TailleEntite);} 
 			else {quadr(":=",tmp2,"  ",$1);t++;} }	
 ; 
-exp_arith: exp_arith op_arith identificateur  { if( $3==0 && strcmp("/",$2)==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);} 
+exp_arith: exp_arith op_arith identificateur  { if( $3==0 && strcmp("/",$2)==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);YYABORT;} 
 			else {sprintf(tmp,"%s",$3);sprintf(tmp3,"T%d",t);quadr($2,tmp2,tmp,tmp3);sprintf(tmp2,"T%d",t);t=t+1;}}
-           |exp_arith op_arith const_reel  { if($3==0 && strcmp("/",$2)==0){printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);}
+           |exp_arith op_arith const_reel  { if($3==0 && strcmp("/",$2)==0){printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);YYABORT;}
             else{sprintf(tmp,"%.2f",$3);sprintf(tmp3,"T%d",t);quadr($2,tmp2,tmp,tmp3);sprintf(tmp2,"T%d",t);t=t+1;}}
-		   |exp_arith op_arith const_entier  { if ( $3==0 && strcmp("/",$2)==0) {printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);}
+		   |exp_arith op_arith const_entier  { if ( $3==0 && strcmp("/",$2)==0) {printf(" ERREUR SEMANTIQUE: division par zero ligne %d colonne %d \n ",nb_ligne,nb_colonne-1);YYABORT;}
 		   else {sprintf(tmp,"%d",$3);sprintf(tmp3,"T%d",t);quadr($2,tmp2,tmp,tmp3);sprintf(tmp2,"T%d",t);t=t+1;}}
 		   |identificateur {strcpy(type,ts[recherche($1)].TypeEntite);sprintf(tmp2,"%s",$1);}
 		   |const_reel {strcpy(type,"reel");sprintf(tmp2,"%.2f",$1);sprintf(tmp3,"T%.2f",$1);}
@@ -135,11 +135,8 @@ constante: const_entier {strcpy(type,"entier");}
 %%
 
 int yyerror(char*  message)
-{ sprintf(message,"%s#",message);
-  const char *ptr = strchr(message, '#');
-  int index;
-
-printf("erreur syntaxique: ligne :%d detecte %s ,plus d informations: %s \n",nb_ligne,yytext,message);
+{ 
+printf("erreur syntaxique: ligne :%d colonne %d detecte %s ,plus d informations: %s \n",nb_ligne,nb_colonne-taille,yytext,message);
 return 1;}
 
 int main()
